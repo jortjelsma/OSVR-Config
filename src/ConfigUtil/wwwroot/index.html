@@ -1,13 +1,15 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
     <meta charset="utf-8" />
     <title></title>
 </head>
-<body ng-app="myApp">
+<body ng-controller="app.main.MainController as vm">
+	{{vm.test}}
+	<div ui-view></div>
 	<script src="lib/jquery/dist/jquery.slim.js"></script>
 	<script src="lib/angular/angular.js"></script>
-	<script src="lib/angular-route/angular-route.js"></script>
-	<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="lib/ui-router/release/angular-ui-router.js"></script>
+	<script src="generated/ts.js"></script>
 </body>
 </html>
