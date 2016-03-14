@@ -4,6 +4,8 @@
   "dependencies": {
     "bootstrap": "3.3.5",
     "angular": "1.4.6",
-    "ui-router": "~0.2.18"
+    "ui-router": "~0.2.18",
+    "angular-bootstrap": "0.13.4",
+    "angular-animate": "1.4.6"
   }
 }
