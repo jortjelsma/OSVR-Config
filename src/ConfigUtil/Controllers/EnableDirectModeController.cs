@@ -22,12 +22,13 @@ namespace ConfigUtil.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromQuery] bool isAmd)
+        public void Post()
         {
             var renderManagerPath = this.config.Get<string>("OSVR_RENDERMANAGER", null);
-            var enableDirectModePath = System.IO.Path.Combine(
-                renderManagerPath, isAmd ? "EnableOSVRDirectModeAMD.exe" : "EnableOSVRDirectMode.exe");
+            var enableDirectModePath = System.IO.Path.Combine(renderManagerPath, "EnableOSVRDirectMode.exe");
+            var enableDirectModePathAMD = System.IO.Path.Combine(renderManagerPath, "EnableOSVRDirectModeAMD.exe");
             Process.Start(enableDirectModePath);
+            Process.Start(enableDirectModePathAMD);
         }
     }
 }

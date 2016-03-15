@@ -1,6 +1,5 @@
 ﻿module app.landingPage {
     class LandingPageController {
-        test = "this is a test in LandingPageController";
     }
 
     angular.module("app.landingPage", [])

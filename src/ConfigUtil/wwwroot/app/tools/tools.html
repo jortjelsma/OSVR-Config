@@ -1,0 +1,55 @@
+﻿<!-- Direct mode -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Direct Mode</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p>Enable or disable direct mode on your HMD.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<button type="button" class="btn btn-primary"
+								ng-click="vm.enableDirectMode()">Enable</button>
+						<button type="button" class="btn btn-primary"
+								ng-click="vm.disableDirectMode()">Disable</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Tracker viewer -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Tracker Viewer</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p>The Tracker Viewer utility visualizes OSVR trackers and can be useful to check if an OSVR device is working properly.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="input-group">
+							<input type="text" class="form-control"
+								   placeholder="OSVR path to track (leave blank to track head and hands)"
+								   ng-model="vm.trackerViewerPath" />
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">Launch Tracker Viewer</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
