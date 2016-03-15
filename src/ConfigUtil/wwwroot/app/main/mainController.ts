@@ -7,8 +7,8 @@
     class MainController {
         navbarItems: INavbarItem[] = [
             {
-                label: "Devices",
-                state: "devices"
+                label: "Samples",
+                state: "samples"
             },
             {
                 label: "Tools",

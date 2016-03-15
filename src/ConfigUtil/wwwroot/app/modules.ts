@@ -5,7 +5,7 @@
             "app.main",
             "app.landingPage",
             "app.tools",
-            "app.devices"
+            "app.samples"
         ])
         .config(["$stateProvider", "$urlRouterProvider",
             ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) => {

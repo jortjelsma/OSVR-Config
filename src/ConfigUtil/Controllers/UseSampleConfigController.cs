@@ -11,23 +11,23 @@ using Microsoft.Extensions.Configuration;
 namespace ConfigUtil.Controllers
 {
     [Route("api/[controller]")]
-    public class UsePresetConfigController : Controller
+    public class UseSampleConfigController : Controller
     {
         private readonly IConfiguration config;
 
-        public UsePresetConfigController(IConfiguration config)
+        public UseSampleConfigController(IConfiguration config)
         {
             this.config = config;
         }
 
-        // POST api/useconfigpreset
+        // POST api/usesampleconfig
         [HttpPost]
-        public void Post([FromQuery]string presetFileName)
+        public void Post([FromQuery]string sampleFileName)
         {
-            var serverPath = config.Get<string>("OSVR_SERVER");
-            var sampleConfigPath = System.IO.Path.Combine(serverPath, "bin\\sample-configs");
-            var presetConfigPath = System.IO.Path.Combine(sampleConfigPath, presetFileName);
-            var serverConfigPath = System.IO.Path.Combine(serverPath, "bin\\osvr_server_config.json");
+            var serverPath = config.Get<string>("OSVR_SERVER_ROOT");
+            var sampleConfigPath = System.IO.Path.Combine(serverPath, "sample-configs");
+            var presetConfigPath = System.IO.Path.Combine(sampleConfigPath, sampleFileName);
+            var serverConfigPath = System.IO.Path.Combine(serverPath, "osvr_server_config.json");
             System.IO.File.Copy(presetConfigPath, serverConfigPath, true);
         }
     }

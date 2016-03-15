@@ -1,0 +1,16 @@
+﻿<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Sample Configurations</h3>
+	</div>
+	<div class="panel-body">
+		Select one of the following sample configurations to save it as the default configuration.
+		<div class="alert alert-danger" role="alert">Note: This will overwrite the current configuration.</div>
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="sampleConfig in vm.sampleConfigs">
+				<button type="button" class="btn btn-primary" ng-click="vm.clickSampleConfig(sampleConfig)">Use</button>
+				<button type="button" class="btn btn-default" ng-click="vm.viewSampleConfig(sampleConfig)">View</button>
+				{{sampleConfig.FileName}}
+			</li>
+		</ul>
+	</div>
+</div>

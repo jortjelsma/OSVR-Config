@@ -11,21 +11,21 @@ using Microsoft.Extensions.Configuration;
 namespace ConfigUtil.Controllers
 {
     [Route("api/[controller]")]
-    public class ServerConfigPresetsController : Controller
+    public class SampleConfigsController : Controller
     {
         private readonly IConfiguration config;
 
-        public ServerConfigPresetsController(IConfiguration config)
+        public SampleConfigsController(IConfiguration config)
         {
             this.config = config;
         }
 
-        // GET: api/values
+        // GET: api/sampleconfigs
         [HttpGet]
         public IEnumerable<ServerConfigPreset> Get()
         {
-            var serverPath = config.Get<string>("OSVR_SERVER");
-            var displaysPath = System.IO.Path.Combine(serverPath, "bin/sample-configs");
+            var serverPath = config.Get<string>("OSVR_SERVER_ROOT");
+            var displaysPath = System.IO.Path.Combine(serverPath, "sample-configs");
 
             return from displayFile in System.IO.Directory.EnumerateFiles(displaysPath)
                    where displayFile.Contains("osvr_server_config")
