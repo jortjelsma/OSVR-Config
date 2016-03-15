@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using ConfigUtil.Models;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,6 +36,20 @@ namespace ConfigUtil.Controllers
                        FileName = System.IO.Path.GetFileName(displayFile),
                        Description = GetDescription(displayFile)
                    };
+        }
+
+        // GET api/sampleconfigs/sampleFileName
+        [HttpGet("{fileName}")]
+        public JObject Get(string fileName)
+        {
+            var serverPath = config.Get<string>("OSVR_SERVER_ROOT");
+            var filePath = System.IO.Path.Combine(serverPath, "sample-configs", fileName);
+            string ret = null;
+            using (var sr = System.IO.File.OpenText(filePath))
+            {
+                ret = sr.ReadToEnd();
+            }
+            return JObject.Parse(ret);
         }
 
         private static string GetDescription(string displayFile)
