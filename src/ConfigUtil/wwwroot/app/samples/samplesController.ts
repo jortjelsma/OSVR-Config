@@ -2,6 +2,8 @@
     interface ISampleConfig {
         FileName: string;
         Description: string;
+        showDetail?: boolean;
+        detailJson?: any;
     }
 
     class SamplesController {
@@ -28,12 +30,17 @@
         }
 
         viewSampleConfig(sampleConfig: ISampleConfig) {
+            var i = 0;
+            for (i = 0; i < this.sampleConfigs.length; i++) {
+                this.sampleConfigs[i].showDetail = false;
+            }
             this.$http.get("/api/sampleConfigs/" + sampleConfig.FileName).then(
                 result => {
-                    
+                    sampleConfig.showDetail = true;
+                    sampleConfig.detailJson = result.data;
                 },
                 errorReason => {
-
+                    this.$log.error("Could not get the sample config file " + sampleConfig.FileName);
                 });
         }
     }

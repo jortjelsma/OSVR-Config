@@ -6,10 +6,13 @@
 		Select one of the following sample configurations to save it as the default configuration.
 		<div class="alert alert-danger" role="alert">Note: This will overwrite the current configuration.</div>
 		<ul class="list-group">
-			<li class="list-group-item" ng-repeat="sampleConfig in vm.sampleConfigs">
+			<li class="list-group-item" ng-repeat-start="sampleConfig in vm.sampleConfigs">
 				<button type="button" class="btn btn-primary" ng-click="vm.clickSampleConfig(sampleConfig)">Use</button>
 				<button type="button" class="btn btn-default" ng-click="vm.viewSampleConfig(sampleConfig)">View</button>
 				{{sampleConfig.FileName}}
+			</li>
+			<li class="list-group-item" ng-repeat-end="" ng-show="sampleConfig.showDetail">
+				<pre>{{sampleConfig.detailJson | json}}</pre>
 			</li>
 		</ul>
 	</div>
