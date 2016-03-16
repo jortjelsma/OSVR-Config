@@ -24,7 +24,7 @@ namespace ConfigUtil.Controllers
         [HttpPost]
         public void Post()
         {
-            var renderManagerPath = this.config.Get<string>("OSVR_RENDERMANAGER", null);
+            var renderManagerPath = this.config.Get<string>("OSVR_SERVER_ROOT", null);
             var enableDirectModePath = System.IO.Path.Combine(renderManagerPath, "DisableOSVRDirectMode.exe");
             var enableDirectModePathAMD = System.IO.Path.Combine(renderManagerPath, "DisableOSVRDirectModeAMD.exe");
             Process.Start(enableDirectModePath);

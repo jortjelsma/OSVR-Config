@@ -1,5 +1,7 @@
 ﻿module app.tools {
     class ToolsController {
+        trackerViewerPath = "";
+
         enableDirectMode() {
             this.$http.post("/api/enableDirectMode", {}).then(
                 response => {
@@ -16,6 +18,23 @@
                 }, reason => {
                     console.log("/api/disableDirectMode call failed.");
                 });
+        }
+
+        startTrackerViewer() {
+            var paths = (typeof this.trackerViewerPath !== "undefined" && this.trackerViewerPath !== null) ?
+                this.trackerViewerPath.split(" ") : [];
+            this.$http.post("/api/starttrackerviewer", {}, {
+                params: {
+                    paths: paths
+                }
+            }).then(
+                success => {
+                    console.log("starttrackerviewer call succeeded.");
+                },
+                failure => {
+                    console.log("starttrackerviewer call failed.");
+                });
+                
         }
 
         static $inject = ["$http"];

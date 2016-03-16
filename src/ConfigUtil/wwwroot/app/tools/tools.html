@@ -41,10 +41,13 @@
 					<div class="col-md-12">
 						<div class="input-group">
 							<input type="text" class="form-control"
-								   placeholder="OSVR path to track (leave blank to track head and hands)"
+								   placeholder="OSVR path to track (leave blank to track head and hands). Enter multiple paths with a space between each."
 								   ng-model="vm.trackerViewerPath" />
 							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">Launch Tracker Viewer</button>
+								<button class="btn btn-default" type="button"
+										ng-click="vm.startTrackerViewer()">
+									Launch Tracker Viewer
+								</button>
 							</span>
 						</div>
 					</div>
