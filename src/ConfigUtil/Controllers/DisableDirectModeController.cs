@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
+using ConfigUtil.Common;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,7 +25,7 @@ namespace ConfigUtil.Controllers
         [HttpPost]
         public void Post()
         {
-            var renderManagerPath = this.config.Get<string>("OSVR_SERVER_ROOT", null);
+            var renderManagerPath = this.config.GetOSVRServerDirectory();
             var enableDirectModePath = System.IO.Path.Combine(renderManagerPath, "DisableOSVRDirectMode.exe");
             var enableDirectModePathAMD = System.IO.Path.Combine(renderManagerPath, "DisableOSVRDirectModeAMD.exe");
             Process.Start(enableDirectModePath);

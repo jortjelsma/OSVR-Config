@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using ConfigUtil.Models;
 using Microsoft.Extensions.Configuration;
+using ConfigUtil.Common;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,7 +25,7 @@ namespace ConfigUtil.Controllers
         [HttpPost]
         public void Post([FromQuery]string sampleFileName)
         {
-            var serverPath = config.Get<string>("OSVR_SERVER_ROOT");
+            var serverPath = this.config.GetOSVRServerDirectory();
             var sampleConfigPath = System.IO.Path.Combine(serverPath, "sample-configs");
             var presetConfigPath = System.IO.Path.Combine(sampleConfigPath, sampleFileName);
             var serverConfigPath = System.IO.Path.Combine(serverPath, "osvr_server_config.json");

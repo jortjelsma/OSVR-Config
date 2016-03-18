@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
+using ConfigUtil.Common;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,7 +25,7 @@ namespace ConfigUtil.Controllers
         [HttpPost]
         public void Post([FromQuery]IEnumerable<string> paths)
         {
-            var osvrServerPath = this.config.Get<string>("OSVR_SERVER_ROOT", null);
+            var osvrServerPath = this.config.GetOSVRServerDirectory();
             var trackerViewerPath = System.IO.Path.Combine(osvrServerPath, "OSVRTrackerView.exe");
             Process.Start(trackerViewerPath, String.Join(" ", paths));
         }

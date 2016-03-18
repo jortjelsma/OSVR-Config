@@ -7,6 +7,7 @@ using ConfigUtil.Models;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ConfigUtil.Common;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,7 +27,7 @@ namespace ConfigUtil.Controllers
         [HttpGet]
         public IEnumerable<ServerConfigPreset> Get()
         {
-            var serverPath = config.Get<string>("OSVR_SERVER_ROOT");
+            var serverPath = this.config.GetOSVRServerDirectory();
             var displaysPath = System.IO.Path.Combine(serverPath, "sample-configs");
 
             return from displayFile in System.IO.Directory.EnumerateFiles(displaysPath)
@@ -42,7 +43,7 @@ namespace ConfigUtil.Controllers
         [HttpGet("{fileName}")]
         public JObject Get(string fileName)
         {
-            var serverPath = config.Get<string>("OSVR_SERVER_ROOT");
+            var serverPath = this.config.GetOSVRServerDirectory();
             var filePath = System.IO.Path.Combine(serverPath, "sample-configs", fileName);
             string ret = null;
             using (var sr = System.IO.File.OpenText(filePath))
