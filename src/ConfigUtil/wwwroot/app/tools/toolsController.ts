@@ -37,6 +37,16 @@
                 
         }
 
+        startServer() {
+            this.$http.post("/api/startserver", {}).then(
+                success => {
+                    console.log("startserver call succeeded.");
+                },
+                failure => {
+                    console.log("startserver call failed.");
+                });
+        }
+
         static $inject = ["$http"];
         constructor(private $http: ng.IHttpService) { }
     }
