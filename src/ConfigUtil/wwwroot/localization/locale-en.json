@@ -1,0 +1,43 @@
+﻿{
+  "index": {
+    "toggleNavigation": "Toggle navigation",
+    "navHome": "OSVR-Config",
+    "navBarItems": {
+      "samples": "Samples",
+      "tools": "Tools"
+    }
+  },
+  "landingPage": {
+    "jumboTron": {
+      "title": "OSVR Config",
+      "description": "This utility will help you configure OSVR.",
+      "learnMore":  "Learn more"
+    }
+  },
+  "samples": {
+    "panelTitle": "Sample Configurations",
+    "panelDescription": "Select one of the following sample configurations to save it as the default configuration.",
+    "overwriteWarning": "Note: This will overwrite the current configuration.",
+    "useSample": "Use",
+    "viewSample":  "View"
+  },
+  "tools": {
+    "startServer": {
+      "title": "Launch OSVR Server",
+      "description": "Launch the OSVR Server on this machine, if not already running.",
+      "launchServer": "Launch Server"
+    },
+    "directMode": {
+      "title": "Direct Mode",
+      "description": "Enable or disable direct mode on your HMD.",
+      "enable": "Enable",
+      "disable": "Disable"
+    },
+    "trackerViewer": {
+      "title": "Tracker Viewer",
+      "description": "The Tracker Viewer utility visualizes OSVR trackers and can be useful to check if an OSVR device is working properly.",
+      "pathPlaceholder": "OSVR path to track (leave blank to track head and hands). Enter multiple paths with a space between each.",
+      "launchTrackerViewer": "Launch Tracker Viewer"
+    }
+  }
+}

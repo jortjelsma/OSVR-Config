@@ -1,17 +1,17 @@
 ﻿module app.main {
     interface INavbarItem {
-        label: string;
+        labelTranslateKey: string;
         state: string;
     }
 
     class MainController {
         navbarItems: INavbarItem[] = [
             {
-                label: "Samples",
+                labelTranslateKey: "index.navBarItems.samples",
                 state: "samples"
             },
             {
-                label: "Tools",
+                labelTranslateKey: "index.navBarItems.tools",
                 state: "tools"
             }
         ];
