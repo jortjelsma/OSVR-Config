@@ -19,19 +19,13 @@
 module app.landingPage {
     class LandingPageController {
         currentConfig: any = {};
-        static $inject = ["$http", "$log"];
-        constructor(private $http: ng.IHttpService, private $log: ng.ILogService) {
-            $http.get("/api/currentconfig").then(
-                success => {
-                    this.currentConfig = success.data;
-                },
-                failure => {
-                    $log.error("Could not get the current config.");
-                });
+        static $inject = ["$http", "$log", "app.common.ConfigService"];
+        constructor(private $http: ng.IHttpService, private $log: ng.ILogService, private configService: app.common.IConfigService) {
+            configService.getCurrent().then(currentConfig => this.currentConfig = currentConfig);
         }
     }
 
-    angular.module("app.landingPage", [])
+    angular.module("app.landingPage", ["app.common.ConfigService"])
         .config(["$stateProvider", ($stateProvider: angular.ui.IStateProvider) => {
             $stateProvider.state("landingPage", {
                 url: "/",
