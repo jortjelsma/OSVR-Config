@@ -50,7 +50,7 @@
       "directDisplayIndex": "Direct Display Index",
       "directHighPriorityEnabled": "Direct High Priority Enabled",
       "numBuffers": "Number of Render Manager Buffers",
-      "numBuffersHelp":  "Use 1 for front-buffer rendering or 2 for double buffering.",
+      "numBuffersHelp": "Use 1 for front-buffer rendering or 2 for double buffering.",
       "renderOverfillFactor": "Overfill Factor",
       "verticalSyncEnabled": "Vertical Sync Enabled",
       "verticalSyncBlockRenderingEnabled": "Vertical Sync Block Rendering Enabled",
@@ -59,8 +59,20 @@
         "fullScreenEnabled": "Fullscreen Enabled",
         "xPosition": "X Position",
         "yPosition": "Y Position"
+      },
+      "display": {
+        "rotation": "Rotation",
+        "rotationHelp": "Use 0 for landscape, 90 for portrait.",
+        "bitsPerColor": "Bits Per Color"
+      },
+      "timeWarp": {
+        "enabled": "Enabled",
+        "asynchronous": "Asynchronous",
+        "maxMsBeforeVSync": "Max Ms Before VSync"
       }
     },
+    "displaySettingsPanelTitle": "Display Settings",
+    "timeWarpSettingsPanelTitle": "Time-Warp Settings",
     "generalSettingsPanelTitle": "General Settings",
     "windowPanelTitle": "Extended Mode Window Settings"
   }

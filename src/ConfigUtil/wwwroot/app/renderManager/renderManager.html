@@ -4,7 +4,7 @@
 		<div class="panel-heading">
 			<h3 class="panel-title" data-translate="renderManager.generalSettingsPanelTitle"></h3>
 		</div>
-		
+
 		<div class="panel-body">
 			<div class="checkbox">
 				<label>
@@ -83,15 +83,17 @@
 				</label>
 			</div>
 
-			<div class="form-group">
-				<label for="windowTitle"
-					   data-translate="renderManager.labels.window.title"></label>
-				<input type="text" class="form-control" id="windowTitle"
-					   ng-model="vm.config.window.title" />
+			<div class="row">
+				<div class="form-group col-md-3">
+					<label for="windowTitle"
+						   data-translate="renderManager.labels.window.title"></label>
+					<input type="text" class="form-control" id="windowTitle"
+						   ng-model="vm.config.window.title" />
+				</div>
 			</div>
 
 			<div class="row">
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-3 col-sm-6 col-xs-6 col-xs-6">
 					<label for="windowXPosition"
 						   data-translate="renderManager.labels.window.xPosition"></label>
 					<input type="number" class="form-control" id="windowXPosition"
@@ -99,7 +101,7 @@
 						   ng-model="vm.config.window.xPosition" />
 				</div>
 
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-3 col-sm-6 col-xs-6">
 					<label for="windowYPosition"
 						   data-translate="renderManager.labels.window.yPosition"></label>
 					<input type="number" class="form-control" id="windowYPosition"
@@ -107,6 +109,58 @@
 						   ng-model="vm.config.window.yPosition" />
 				</div>
 			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title" data-translate="renderManager.displaySettingsPanelTitle"></h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="form-group col-md-3">
+					<label for="displayRotation"
+						   data-translate="renderManager.labels.display.rotation"></label>
+					<input type="number" class="form-control" id="displayRotation"
+						   step="90"
+						   ng-model="vm.config.display.rotation" />
+					<p class="help-block" data-translate="renderManager.labels.display.rotationHelp"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title" data-translate="renderManager.timeWarpSettingsPanelTitle"></h3>
+		</div>
+		<div class="panel-body">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox"
+						   ng-model="vm.config.timeWarp.enabled" />
+					{{'renderManager.labels.timeWarp.enabled' | translate}}
+				</label>
+			</div>
+
+			<div class="checkbox">
+				<label>
+					<input type="checkbox"
+						   ng-model="vm.config.timeWarp.asynchronous" />
+					{{'renderManager.labels.timeWarp.asynchronous' | translate}}
+				</label>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-md-3">
+					<label for="timeWarpMaxMsBeforeVSync"
+						   data-translate="renderManager.labels.timeWarp.maxMsBeforeVSync"></label>
+					<input type="number" class="form-control" id="timeWarpMaxMsBeforeVSync"
+						   step="1"
+						   ng-model="vm.config.timeWarp.maxMsBeforeVSync" />
+				</div>
+			</div>
+
 		</div>
 	</div>
 
@@ -124,10 +178,10 @@
 					data-translate="renderManager.save"
 					ng-disabled="renderManagerForm.$pristine"
 					ng-click="vm.save()"></button>
-				<a href=""
-				   class="btn btn-link"
-				   data-translate="{{vm.showHideConfigJsonButtonTextKey()}}"
-				   ng-click="vm.toggleShowConfigJson()"></a>
+			<a href=""
+				class="btn btn-link"
+				data-translate="{{vm.showHideConfigJsonButtonTextKey()}}"
+				ng-click="vm.toggleShowConfigJson()"></a>
 		</div>
 	</div>
 </form>
