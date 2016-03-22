@@ -63,7 +63,7 @@ module app.samples {
         }
     }
 
-    angular.module("app.samples", [])
+    angular.module("app.samples", ["ui.router"])
         .config(["$stateProvider", ($stateProvider: angular.ui.IStateProvider) => {
             $stateProvider.state("samples", {
                 url: "/samples",

@@ -69,7 +69,7 @@ module app.tools {
         constructor(private $http: ng.IHttpService) { }
     }
 
-    angular.module("app.tools", [])
+    angular.module("app.tools", ["ui.router"])
         .config(["$stateProvider", ($stateProvider: angular.ui.IStateProvider) => {
             $stateProvider.state("tools", {
                 url: "/tools",

@@ -24,12 +24,15 @@ module app.common {
     }
 
     export interface IOSVRConfig {
-        Body: any[];
+        Body: any;
         Includes: IOSVRInclude[];
     }
 
+    export interface ISetCurrentConfigResponse { }
+
     export interface IConfigService {
         getCurrent(): ng.IPromise<IOSVRConfig>;
+        setCurrent(newConfig: IOSVRConfig): ng.IPromise<ISetCurrentConfigResponse>;
     }
 
     class ConfigService implements IConfigService {
@@ -38,6 +41,10 @@ module app.common {
 
         getCurrent(): ng.IPromise<IOSVRConfig> {
             return this.$http.get("/api/currentconfig").then(result => { return result.data });
+        }
+
+        setCurrent(newConfig: IOSVRConfig): ng.IPromise<ISetCurrentConfigResponse> {
+            return this.$http.post("/api/currentconfig", newConfig);
         }
     }
 

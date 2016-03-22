@@ -24,6 +24,7 @@ module modules {
             "app.landingPage",
             "app.tools",
             "app.samples",
+            "app.renderManager",
             "pascalprecht.translate"
         ])
         .config(["$stateProvider", "$urlRouterProvider", "$translateProvider",

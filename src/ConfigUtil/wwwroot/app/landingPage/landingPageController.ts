@@ -25,7 +25,7 @@ module app.landingPage {
         }
     }
 
-    angular.module("app.landingPage", ["app.common.ConfigService"])
+    angular.module("app.landingPage", ["app.common.ConfigService", "ui.router"])
         .config(["$stateProvider", ($stateProvider: angular.ui.IStateProvider) => {
             $stateProvider.state("landingPage", {
                 url: "/",

@@ -4,7 +4,8 @@
     "navHome": "OSVR-Config",
     "navBarItems": {
       "samples": "Samples",
-      "tools": "Tools"
+      "tools": "Tools",
+      "renderManager": "Rendering"
     }
   },
   "landingPage": {
@@ -39,5 +40,28 @@
       "pathPlaceholder": "OSVR path to track (leave blank to track head and hands). Enter multiple paths with a space between each.",
       "launchTrackerViewer": "Launch Tracker Viewer"
     }
+  },
+  "renderManager": {
+    "save": "Save",
+    "showConfigJson": "Show JSON",
+    "hideConfigJson": "Hide JSON",
+    "labels": {
+      "directModeEnabled": "Direct Mode Enabled",
+      "directDisplayIndex": "Direct Display Index",
+      "directHighPriorityEnabled": "Direct High Priority Enabled",
+      "numBuffers": "Number of Render Manager Buffers",
+      "numBuffersHelp":  "Use 1 for front-buffer rendering or 2 for double buffering.",
+      "renderOverfillFactor": "Overfill Factor",
+      "verticalSyncEnabled": "Vertical Sync Enabled",
+      "verticalSyncBlockRenderingEnabled": "Vertical Sync Block Rendering Enabled",
+      "window": {
+        "title": "Title",
+        "fullScreenEnabled": "Fullscreen Enabled",
+        "xPosition": "X Position",
+        "yPosition": "Y Position"
+      }
+    },
+    "generalSettingsPanelTitle": "General Settings",
+    "windowPanelTitle": "Extended Mode Window Settings"
   }
 }

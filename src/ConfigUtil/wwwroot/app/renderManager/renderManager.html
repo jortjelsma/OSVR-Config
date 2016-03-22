@@ -1,0 +1,145 @@
+﻿
+<form id="renderManagerForm">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title" data-translate="renderManager.generalSettingsPanelTitle"></h3>
+		</div>
+		
+		<div class="panel-body">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox"
+						   ng-model="vm.config.directModeEnabled" />
+					{{'renderManager.labels.directModeEnabled' | translate}}
+				</label>
+			</div>
+
+			<div class="checkbox">
+				<label>
+					<input type="checkbox"
+						   ng-model="vm.config.directHighPriorityEnabled" />
+					{{'renderManager.labels.directHighPriorityEnabled' | translate}}
+				</label>
+			</div>
+
+			<div class="checkbox">
+				<label>
+					<input type="checkbox"
+						   ng-model="vm.config.verticalSyncEnabled" />
+					{{'renderManager.labels.verticalSyncEnabled' | translate}}
+				</label>
+			</div>
+
+			<div class="checkbox">
+				<label>
+					<input type="checkbox"
+						   ng-model="vm.config.verticalSyncBlockRenderingEnabled" />
+					{{'renderManager.labels.verticalSyncBlockRenderingEnabled' | translate}}
+				</label>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="directDisplayIndex"
+						   data-translate="renderManager.labels.directDisplayIndex"></label>
+					<input type="number" class="form-control" id="directDisplayIndex"
+						   step="1"
+						   ng-model="vm.config.directDisplayIndex" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="renderOverfillFactor"
+						   data-translate="renderManager.labels.renderOverfillFactor"></label>
+					<input type="number" class="form-control" id="renderOverfillFactor"
+						   step="0.1"
+						   ng-model="vm.config.renderOverfillFactor" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="numBuffers"
+						   data-translate="renderManager.labels.numBuffers"></label>
+					<input type="number" class="form-control" id="numBuffers"
+						   step="1"
+						   ng-model="vm.config.numBuffers" />
+					<p class="help-block" data-translate="renderManager.labels.numBuffersHelp"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title" data-translate="renderManager.windowPanelTitle"></h3>
+		</div>
+		<div class="panel-body">
+
+			<div class="checkbox">
+				<label>
+					<input type="checkbox"
+						   ng-model="vm.config.window.fullScreenEnabled" />
+					{{'renderManager.labels.window.fullScreenEnabled' | translate}}
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label for="windowTitle"
+					   data-translate="renderManager.labels.window.title"></label>
+				<input type="text" class="form-control" id="windowTitle"
+					   ng-model="vm.config.window.title" />
+			</div>
+
+			<div class="row">
+				<div class="form-group col-md-3">
+					<label for="windowXPosition"
+						   data-translate="renderManager.labels.window.xPosition"></label>
+					<input type="number" class="form-control" id="windowXPosition"
+						   step="0.1"
+						   ng-model="vm.config.window.xPosition" />
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="windowYPosition"
+						   data-translate="renderManager.labels.window.yPosition"></label>
+					<input type="number" class="form-control" id="windowYPosition"
+						   step="0.1"
+						   ng-model="vm.config.window.yPosition" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- I love CSS -->
+	<div class="row">
+		<div class="col-md-12">
+			<p></p>
+		</div>
+	</div>
+
+	<!-- Save -->
+	<div class="row">
+		<div class="col-md-12">
+			<button class="btn btn-primary"
+					data-translate="renderManager.save"
+					ng-disabled="renderManagerForm.$pristine"
+					ng-click="vm.save()"></button>
+				<a href=""
+				   class="btn btn-link"
+				   data-translate="{{vm.showHideConfigJsonButtonTextKey()}}"
+				   ng-click="vm.toggleShowConfigJson()"></a>
+		</div>
+	</div>
+</form>
+
+<div class="row">
+	<div class="col-md-12">
+		<p></p>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12" ng-show="vm.showConfigJson">
+		<pre>{{vm.config | json}}</pre>
+	</div>
+</div>
