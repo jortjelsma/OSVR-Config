@@ -53,34 +53,8 @@ namespace ConfigUtil.Controllers
                    select new ServerConfigPreset()
                    {
                        FileName = System.IO.Path.GetFileName(displayFile),
-                       Description = GetDescription(displayFile)
+                       Body = OSVRConfig.Read(displayFile, config),
                    };
-        }
-
-        // GET api/sampleconfigs/sampleFileName
-        [HttpGet("{fileName}")]
-        public JObject Get(string fileName)
-        {
-            var serverPath = this.config.GetOSVRServerDirectory();
-            var filePath = System.IO.Path.Combine(serverPath, "sample-configs", fileName);
-            string ret = null;
-            using (var sr = System.IO.File.OpenText(filePath))
-            {
-                ret = sr.ReadToEnd();
-            }
-            return JObject.Parse(ret);
-        }
-
-        private static string GetDescription(string displayFile)
-        {
-            switch(displayFile)
-            {
-                // @todo add some descriptions?
-                // Do we even need descriptions?
-                // If so, can we just read the description from the file?
-                default:
-                    return "";
-            }
         }
     }
 }

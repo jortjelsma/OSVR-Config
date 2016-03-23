@@ -36,9 +36,15 @@ namespace ConfigUtil.Models
                 string relativePath = token.Value<string>();
                 ret = new OSVRInclude();
                 ret.RelativePath = relativePath;
-                using (var includeReader = File.OpenText(Path.Combine(serverRoot, relativePath)))
+                try {
+                    using (var includeReader = File.OpenText(Path.Combine(serverRoot, relativePath)))
+                    {
+                        ret.Body = (JObject)JObject.ReadFrom(new JsonTextReader(includeReader));
+                    }
+                }
+                catch (System.IO.FileNotFoundException)
                 {
-                    ret.Body = (JObject)JObject.ReadFrom(new JsonTextReader(includeReader));
+                    ret = null;
                 }
             }
             return ret;

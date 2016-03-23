@@ -30,33 +30,41 @@ namespace ConfigUtil.Models
         public JObject Body { get; set; }
         public IEnumerable<OSVRInclude> Includes { get; set; }
 
-        public static OSVRConfig GetCurrent(IConfiguration config)
+        public static OSVRConfig Read(string filePath, IConfiguration config)
         {
             var ret = new OSVRConfig();
             var serverRoot = config.GetOSVRServerDirectory();
-            var configPath = Path.Combine(serverRoot, "osvr_server_config.json");
             var includes = new List<OSVRInclude>();
             ret.Includes = includes;
 
-            using (var configReader = File.OpenText(configPath))
+            using (var configReader = File.OpenText(filePath))
+            using (var jr = new JsonTextReader(configReader))
             {
-                ret.Body = (JObject)JObject.ReadFrom(new JsonTextReader(configReader));
+                JToken token = JObject.ReadFrom(jr);
+                ret.Body = (JObject)token;
 
                 // Display
                 var displayInclude = OSVRInclude.Parse(ret.Body, "display", serverRoot);
-                if(displayInclude != null)
+                if (displayInclude != null)
                 {
                     includes.Add(displayInclude);
                 }
 
                 // RenderManager
                 var renderManagerInclude = OSVRInclude.Parse(ret.Body, "renderManagerConfig", serverRoot);
-                if(renderManagerInclude != null)
+                if (renderManagerInclude != null)
                 {
                     includes.Add(renderManagerInclude);
                 }
             }
             return ret;
+        }
+
+        public static OSVRConfig GetCurrent(IConfiguration config)
+        {
+            var serverRoot = config.GetOSVRServerDirectory();
+            var configPath = Path.Combine(serverRoot, "osvr_server_config.json");
+            return OSVRConfig.Read(configPath, config);
         }
     }
 }

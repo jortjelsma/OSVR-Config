@@ -6,13 +6,26 @@
 		{{'samples.panelDescription' | translate}}
 		<div class="alert alert-danger" role="alert" data-translate="samples.overwriteWarning"></div>
 		<ul class="list-group">
-			<li class="list-group-item" ng-repeat-start="sampleConfig in vm.sampleConfigs">
-				<button type="button" class="btn btn-primary" ng-click="vm.clickSampleConfig(sampleConfig)" data-translate="samples.useSample"></button>
-				<button type="button" class="btn btn-default" ng-click="vm.viewSampleConfig(sampleConfig)" data-translate="samples.viewSample"></button>
-				{{sampleConfig.FileName}}
-			</li>
-			<li class="list-group-item" ng-repeat-end="" ng-show="sampleConfig.showDetail">
-				<pre>{{sampleConfig.detailJson | json}}</pre>
+			<li class="list-group-item" ng-repeat="sampleConfig in vm.sampleConfigs">
+				<div class="row">
+					<div class="col-md-12">
+						<h3>{{sampleConfig.FileName}}</h3>
+						<p class="help-block">{{sampleConfig.Body.Body.description}}</p>
+					</div>
+				</div>
+				
+				<div class="row" ng-show="sampleConfig.showDetail">
+					<div class="col-md-12">
+						<pre>{{sampleConfig.Body | json}}</pre>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<button type="button" class="btn btn-primary" ng-click="vm.clickSampleConfig(sampleConfig)" data-translate="samples.useSample"></button>
+						<button type="button" class="btn btn-default" ng-click="vm.viewSampleConfig(sampleConfig)" data-translate="samples.viewSample"></button>
+					</div>
+				</div>
+
 			</li>
 		</ul>
 	</div>
