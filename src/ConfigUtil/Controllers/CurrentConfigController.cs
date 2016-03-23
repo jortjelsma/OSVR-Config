@@ -23,8 +23,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using ConfigUtil.Models;
 using Microsoft.Extensions.Configuration;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+using System.IO;
+using ConfigUtil.Common;
+using Newtonsoft.Json;
 
 namespace ConfigUtil.Controllers
 {
@@ -49,6 +50,19 @@ namespace ConfigUtil.Controllers
         [HttpPost]
         public void Post([FromBody]OSVRConfig value)
         {
+            var serverPath = config.GetOSVRServerDirectory();
+            var configPath = Path.Combine(serverPath, "osvr_server_config.json");
+
+            // ignoring includes.
+            var mainConfigBody = value.Body;
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.NullValueHandling = NullValueHandling.Ignore;
+            serializer.Formatting = Formatting.Indented;
+            using(StreamWriter sw = System.IO.File.CreateText(configPath))
+            using(JsonWriter jw = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(jw, mainConfigBody);
+            }
         }
     }
 }

@@ -22,13 +22,18 @@ module app.renderManager {
 
     }
 
+    interface IRenderManagerControllerScope extends ng.IScope {
+        vm: RenderManagerController;
+        renderManagerForm: IRenderManagerForm;
+    }
+
     class RenderManagerController {
         configRoot: app.common.IOSVRConfig;
         config: any;
         showConfigJson = false;
 
-        static $inject = ["app.common.ConfigService"];
-        constructor(private configService: app.common.IConfigService) {
+        static $inject = ["$scope", "app.common.ConfigService"];
+        constructor(private $scope: IRenderManagerControllerScope, private configService: app.common.IConfigService) {
             configService.getCurrent().then(config => {
                 var rmConfig: any = null;
                 var i = 0;
@@ -50,6 +55,15 @@ module app.renderManager {
                             break;
                         }
                     }
+                } else if (!angular.isDefined(this.configRoot.Body.renderManagerConfig) ||
+                    this.configRoot.Body.renderManagerConfig === null) {
+                    this.configRoot.Body.renderManagerConfig = {
+                        renderManagerConfig: {}
+                    };
+
+                    this.config = this.configRoot.Body.renderManagerConfig.renderManagerConfig;
+                } else {
+                    this.config = this.configRoot.Body.renderManagerConfig.renderManagerConfig;
                 }
             });
         }
@@ -63,7 +77,10 @@ module app.renderManager {
         }
 
         save() {
-            this.configService.setCurrent(this.configRoot);
+            this.configService.setCurrent(this.configRoot).then(
+                _ => {
+                    this.$scope.renderManagerForm.$setPristine();
+                });
         }
     }
 
