@@ -25,7 +25,11 @@ If you'd like to helo with development, and not just build the project:
  * Atom.io (with C# and TypeScript extensions installed). You may need to build from the command line.
 
 ## Build
-### Command Line
+### Command Line - Scripted
+ * Run the `build_release.cmd` (Windows) or `build_release.sh` (Linux/OS X) script.
+   * This will do the same thing as the following section: download backend NuGet packages, install frontend dependencies, build the frontend, then publish.
+
+### Command Line - Manually
  * Set your working directory to `/OSVR-Config/src/ConfigUtil`
  * Run the following to download backend NuGet packages: `dnu restore`.
  * Run the following: `dnu publish --runtime active --no-source -o ../../artifacts`
