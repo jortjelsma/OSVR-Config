@@ -5,7 +5,7 @@ OSVR-Config is a utility to configure the OSVR Server, and gives you access to a
 ## Prerequisites
  * Install Asp.Net 5.0 (Asp.Net Core 1.0) tools
    * Asp.Net 5.0 is in the process of being renamed Asp.Net Core 1.0 by Microsoft, and in addition the .Net command line tools are being reworked and simplified. For now, however, we are still using the Asp.Net 5.0 version with the DNX command line tools. This is a temporary situation as everything migrates over.
-   * Click [here](https://docs.asp.net/en/latest/getting-started/index.html) for instructions on installing ASP.Net for your platform. We are using CoreCLR exclusively, so when the instructions give you the option to use CoreCLR or the full .Net CLR (on windows), choose CoreCLR by running `dnvm upgrade -r coreclr`.
+   * Click [here](https://docs.asp.net/en/latest/getting-started/index.html) for instructions on installing ASP.Net for your platform. We are using CoreCLR exclusively, so when the instructions give you the option to use CoreCLR or the full .Net CLR (on windows), choose CoreCLR by running `dnvm upgrade -r coreclr`. (For Windows, there's a script in `devtools` that will do this for you.)
    * If you already have ASP.Net installed (via Visual Studio/etc..), we are specifically using version `1.0.0-rc1-update1` (`x86` or `x64` is your choice) and the `coreclr` runtime. So, for example, you can set the default runtime by running `dnvm use 1.0.0-rc1-update1 -r coreclr -p` and then `dnvm upgrade`. This will add the command line tools to your `PATH`.
  * Install NodeJS from [here](https://nodejs.org/)
    * We're currently running with the `4.4.1 LTS` version. The `5.5.1 Stable` version may also work, but this is untested.
@@ -15,6 +15,7 @@ OSVR-Config is a utility to configure the OSVR Server, and gives you access to a
    * `npm install -g gulp` - Used by the prepublish script for frontend build tasks.
    * `npm install -g tsd` - (Optional) You may use this to install new TypeScript typings or update existing ones (not often used).
    * `npm install -g rimraf` (Optional) I only recommend this on Windows, and only with great caution. rimraf will delete directories recursively. It's only useful on Windows because it bypasses all the long file path issues introduced by `npm`'s `node_modules` folder. Please be careful - it does not prompt you for confirmation.
+   * Windows users: There's a script in `devtools` that will handle updating `npm` and installing just the required global tools for you.
 
 ## IDE support
 If you'd like to helo with development, and not just build the project:
