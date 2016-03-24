@@ -30,7 +30,7 @@ If you'd like to help with development, and not just build the project:
    * This will do the same thing as the following section: download backend NuGet packages, install frontend dependencies, build the frontend, then publish.
 
 ### Command Line - Manually
- * Set your working directory to `/OSVR-Config/src/ConfigUtil`
+ * Set your working directory to the `src/ConfigUtil` directory in this project.
  * Run the following to download backend NuGet packages: `dnu restore`.
  * Run the following: `dnu publish --runtime active --no-source -o ../../artifacts`
    * This will install frontend dependencies and build the frontend prior to publishing.
@@ -40,9 +40,9 @@ If you'd like to help with development, and not just build the project:
   * In the Run button dropdown, ensure that `web` is selected. This makes the backend run as a standalone server. Avoid using IIS Express.
   * Also in the Run button dropdown, ensure that the .NET Runtime Type is set to Core CLR.
   * The build, debug, and clean commands in Visual Studio will build both the frontend and the backend.
-  * There is a publish profile called `filesystem` that builds the frontend and backend into `/artifacts/bin/ConfigUtil/PublishOutput`. Run the `Publish ConfigUtil` menu item from the `Build` menu. Keep in mind this is not the `Release` build that is published - currently you must use the command line to build the standalone release binary (see instructions above).
+  * There is a publish profile called `filesystem` that builds the frontend and backend into `artifacts/bin/ConfigUtil/PublishOutput` within this repository's root directory. Run the `Publish ConfigUtil` menu item from the `Build` menu. Keep in mind this is not the `Release` build that is published - currently you must use the command line to build the standalone release binary (see instructions above).
 
 # Running OSVR-Config
- * Once you've published the application with `dnu`, you should have a `web.cmd` (for Windows) and/or a `web` shell script (for Mac/Linux) located in `/OSVR-Config/artifacts/approot`. Run this to start the backend.
+ * Once you've published the application with `dnu`, you should have a `web.cmd` (for Windows) and/or a `web` shell script (for Mac/Linux) located in the `artifacts/approot` directory within this repository's root directory. Run this to start the backend.
  * Once the backend is running, go to [http://localhost:5000](http://localhost:5000) in a browser to start the application.
  * There is a github issue to make this a one-click process. See https://github.com/OSVR/OSVR-Config/issues/9.
