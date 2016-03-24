@@ -1,7 +1,5 @@
-rem Make sure you have NodeJS installed first. You might need to do something like
-rem choco install nodejs -version 4.4.0 -y
-rem choco pin add -name nodejs
-rem first...
+rem Make sure you have NodeJS installed first. If you're using Chocolatey,
+rem might I suggest win-install-nodejs-via-choco.cmd first...
 
 rem Update NPM itself first.
 npm update -g npm
