@@ -17,6 +17,8 @@ OSVR-Config is a utility to configure the OSVR Server, and gives you access to a
    * `npm install -g rimraf` (Optional) I only recommend this on Windows, and only with great caution. rimraf will delete directories recursively. It's only useful on Windows because it bypasses all the long file path issues introduced by `npm`'s `node_modules` folder. Please be careful - it does not prompt you for confirmation.
 
 ## IDE support
+If you'd like to helo with development, and not just build the project:
+
  * Visual Studio 2015, with the latest updates, and with the latest RC1-update1 version of the ASP.Net and web tool extensions.
  * Visual Studio Code (with C# extension installed). You may need to build from the command line.
  * Atom.io (with C# and TypeScript extensions installed). You may need to build from the command line.
