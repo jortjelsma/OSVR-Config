@@ -27,6 +27,7 @@ OSVR-Config is a utility to configure the OSVR Server, and gives you access to a
  * Run the following to download backend NuGet packages: `dnu restore`.
  * Run the following: `dnu publish --runtime active --no-source -o ../../artifacts`
    * This will install frontend dependencies and build the frontend prior to publishing.
+
 ### Visual Studio
 * Visual Studio's CoreCLR/Asp.Net 5.0 and Web tools extensions are all integrated into the IDE.
   * In the Run button dropdown, ensure that `web` is selected. This makes the backend run as a standalone server. Avoid using IIS Express.
