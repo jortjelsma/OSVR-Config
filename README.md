@@ -18,7 +18,7 @@ OSVR-Config is a utility to configure the OSVR Server, and gives you access to a
    * Windows users: There's a script in `devtools` that will handle updating `npm` and installing just the required global tools for you.
 
 ## IDE support
-If you'd like to helo with development, and not just build the project:
+If you'd like to help with development, and not just build the project:
 
  * Visual Studio 2015, with the latest updates, and with the latest RC1-update1 version of the ASP.Net and web tool extensions.
  * Visual Studio Code (with C# extension installed). You may need to build from the command line.
