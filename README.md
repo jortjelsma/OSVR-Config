@@ -4,7 +4,7 @@ OSVR-Config is a utility to configure the OSVR Server, and gives you access to a
 # Build instructions
 ## Prerequisites
  * Install Asp.Net 5.0 (Asp.Net Core 1.0) tools
-   * Asp.Net 5.0 is in the process of being renamed Asp.Net Core 1.0, and in addition the .Net command line tools are being reworked and simplified. For now, however, we are still using the Asp.Net 5.0 version with the DNX command line tools. This is a temporary situation as everything migrates over.
+   * Asp.Net 5.0 is in the process of being renamed Asp.Net Core 1.0 by Microsoft, and in addition the .Net command line tools are being reworked and simplified. For now, however, we are still using the Asp.Net 5.0 version with the DNX command line tools. This is a temporary situation as everything migrates over.
    * Click [here](https://docs.asp.net/en/latest/getting-started/index.html) for instructions on installing ASP.Net for your platform. We are using CoreCLR exclusively, so when the instructions give you the option to use CoreCLR or the full .Net CLR (on windows), choose CoreCLR by running `dnvm upgrade -r coreclr`.
    * If you already have ASP.Net installed (via Visual Studio/etc..), we are specifically using version `1.0.0-rc1-update1` (`x86` or `x64` is your choice) and the `coreclr` runtime. So, for example, you can set the default runtime by running `dnvm use 1.0.0-rc1-update1 -r coreclr -p` and then `dnvm upgrade`. This will add the command line tools to your `PATH`.
  * Install NodeJS from [here](https://nodejs.org/)
