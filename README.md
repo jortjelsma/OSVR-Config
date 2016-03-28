@@ -9,6 +9,7 @@ OSVR-Config is a utility to configure the OSVR Server, and gives you access to a
    * If you already have ASP.NET installed (via Visual Studio/etc..), we are specifically using version `1.0.0-rc1-update1` (`x86` or `x64` is your choice) and the `coreclr` runtime. So, for example, you can set the default runtime by running `dnvm use 1.0.0-rc1-update1 -r coreclr -p` and then `dnvm upgrade`. This will add the command line tools to your `PATH`.
  * Install NodeJS from [here](https://nodejs.org/)
    * We're currently running with the `4.4.1 LTS` version. The `5.5.1 Stable` version may also work, but this is untested.
+   * NOTE: Depending on where you have NodeJS installed in Linux, you may need to prepend `sudo` to some of the npm commands with '-g'. If you get a permission denied error, try running with `sudo`.
    * The version of `npm` installed with NodeJS is always out of date. Run `npm update -g npm` to get the latest version. Otherwise some `npm` dependencies may squawk at you that your `npm` version is out of date.
  * Various global npm tools needed for the frontend build
    * `npm install -g bower` - Used by the prepublish script to get the latest frontend dependencies.
@@ -26,13 +27,14 @@ If you'd like to help with development, and not just build the project:
 
 ## Build
 ### Command Line - Scripted
+ * (Linux/OS X) Make `build_release.sh` executable by running `chmod +x ./build_release.sh`.
  * Run the `build_release.cmd` (Windows) or `build_release.sh` (Linux/OS X) script.
    * This will do the same thing as the following section: download backend NuGet packages, install frontend dependencies, build the frontend, then publish.
 
 ### Command Line - Manually
  * Set your working directory to the `src/ConfigUtil` directory in this project.
  * Run the following to download backend NuGet packages: `dnu restore`.
- * Run the following: `dnu publish --runtime active --no-source -o ../../artifacts` --configuration Release
+ * Run the following: `dnu publish --runtime active --no-source -o ../../artifacts --configuration Release`
    * This will install frontend dependencies and build the frontend prior to publishing.
 
 ### Visual Studio
