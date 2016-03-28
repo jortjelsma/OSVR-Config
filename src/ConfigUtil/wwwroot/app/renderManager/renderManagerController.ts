@@ -31,6 +31,7 @@ module app.renderManager {
         configRoot: app.common.IOSVRConfig;
         config: any;
         showConfigJson = false;
+        showAdvanced = false;
 
         static $inject = ["$scope", "app.common.ConfigService"];
         constructor(private $scope: IRenderManagerControllerScope, private configService: app.common.IConfigService) {

@@ -13,7 +13,7 @@
 				</label>
 			</div>
 
-			<div class="checkbox">
+			<div class="checkbox" ng-show="vm.showAdvanced">
 				<label>
 					<input type="checkbox"
 						   ng-model="vm.config.directHighPriorityEnabled" />
@@ -21,7 +21,7 @@
 				</label>
 			</div>
 
-			<div class="checkbox">
+			<div class="checkbox" ng-show="vm.showAdvanced">
 				<label>
 					<input type="checkbox"
 						   ng-model="vm.config.verticalSyncEnabled" />
@@ -29,7 +29,7 @@
 				</label>
 			</div>
 
-			<div class="checkbox">
+			<div class="checkbox" ng-show="vm.showAdvanced">
 				<label>
 					<input type="checkbox"
 						   ng-model="vm.config.verticalSyncBlockRenderingEnabled" />
@@ -37,7 +37,7 @@
 				</label>
 			</div>
 
-			<div class="row">
+			<div class="row" ng-show="vm.showAdvanced">
 				<div class="form-group col-md-4">
 					<label for="directDisplayIndex"
 						   data-translate="renderManager.labels.directDisplayIndex"></label>
@@ -47,16 +47,17 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-4"ng-show="vm.showAdvanced">
 					<label for="renderOverfillFactor"
 						   data-translate="renderManager.labels.renderOverfillFactor"></label>
 					<input type="number" class="form-control" id="renderOverfillFactor"
 						   step="0.1"
 						   ng-model="vm.config.renderOverfillFactor" />
+					<p class="help-block" data-translate="renderManager.labels.renderOverfillFactorHelp"></p>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-4" ng-show="vm.showAdvanced">
 					<label for="numBuffers"
 						   data-translate="renderManager.labels.numBuffers"></label>
 					<input type="number" class="form-control" id="numBuffers"
@@ -150,7 +151,7 @@
 				</label>
 			</div>
 
-			<div class="row">
+			<div class="row" ng-show="vm.showAdvanced">
 				<div class="form-group col-md-3">
 					<label for="timeWarpMaxMsBeforeVSync"
 						   data-translate="renderManager.labels.timeWarp.maxMsBeforeVSync"></label>
@@ -166,7 +167,10 @@
 	<!-- I love CSS -->
 	<div class="row">
 		<div class="col-md-12">
-			<p></p>
+			<label>
+				<input type="checkbox"
+					   ng-model="vm.showAdvanced" />{{'renderManager.labels.infrequentlyUsedSettings' | translate}}
+			</label>
 		</div>
 	</div>
 

@@ -46,12 +46,14 @@
     "showConfigJson": "Show JSON",
     "hideConfigJson": "Hide JSON",
     "labels": {
+      "infrequentlyUsedSettings": "Show Infrequently Used Settings",
       "directModeEnabled": "Direct Mode Enabled",
       "directDisplayIndex": "Direct Display Index",
       "directHighPriorityEnabled": "Direct High Priority Enabled",
       "numBuffers": "Number of Render Manager Buffers",
       "numBuffersHelp": "Use 1 for front-buffer rendering or 2 for double buffering.",
       "renderOverfillFactor": "Overfill Factor",
+      "renderOverfillFactorHelp": "Specify a value between 1.0 and 2.0. A larger value may increase field of view slightly while moving your head, at the cost of performance.",
       "verticalSyncEnabled": "Vertical Sync Enabled",
       "verticalSyncBlockRenderingEnabled": "Vertical Sync Block Rendering Enabled",
       "window": {
