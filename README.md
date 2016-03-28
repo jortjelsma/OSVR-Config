@@ -27,7 +27,6 @@ If you'd like to help with development, and not just build the project:
 
 ## Build
 ### Command Line - Scripted
- * (Linux/OS X) Make `build_release.sh` executable by running `chmod +x ./build_release.sh`.
  * Run the `build_release.cmd` (Windows) or `build_release.sh` (Linux/OS X) script.
    * This will do the same thing as the following section: download backend NuGet packages, install frontend dependencies, build the frontend, then publish.
 
