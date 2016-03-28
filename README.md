@@ -32,7 +32,7 @@ If you'd like to help with development, and not just build the project:
 ### Command Line - Manually
  * Set your working directory to the `src/ConfigUtil` directory in this project.
  * Run the following to download backend NuGet packages: `dnu restore`.
- * Run the following: `dnu publish --runtime active --no-source -o ../../artifacts`
+ * Run the following: `dnu publish --runtime active --no-source -o ../../artifacts` --configuration Release
    * This will install frontend dependencies and build the frontend prior to publishing.
 
 ### Visual Studio
