@@ -1,0 +1,51 @@
+﻿<form name="pluginsForm">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title" data-translate="plugins.manualPluginsTitle"></h3>
+		</div>
+
+		<div class="panel-body">
+			<p class="help-block" data-translate="plugins.manualPluginsPanelHelp"></p>
+			<div ng-repeat="plugin in vm.plugins">
+				<div class="row">
+					<div class="col-md-6 col-sm-12 col-xs-12">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="checkbox" aria-label="..." ng-model="plugin.enabled">
+								</span>
+								<input type="text" class="form-control" ng-model="plugin.Name" disabled />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" class="form-control"
+								   placeholder="{{'plugins.nextPluginPlaceholder' | translate}}"
+								   ng-model="vm.nextPlugin" />
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-primary"
+										data-translate="plugins.addPlugin"
+										ng-click="vm.addPlugin(vm.nextPlugin)"></button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+	<!-- Save -->
+<div class="row">
+	<div class="col-md-12">
+		<button class="btn btn-primary"
+				data-translate="plugins.save"
+				ng-disabled="pluginsForm.$pristine"
+				ng-click="vm.save()"></button>
+	</div>
+</div>

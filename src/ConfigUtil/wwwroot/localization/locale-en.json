@@ -5,6 +5,7 @@
     "navBarItems": {
       "samples": "Samples",
       "tools": "Tools",
+      "plugins": "Plugins",
       "renderManager": "Rendering"
     }
   },
@@ -77,5 +78,12 @@
     "timeWarpSettingsPanelTitle": "Time-Warp Settings",
     "generalSettingsPanelTitle": "General Settings",
     "windowPanelTitle": "Extended Mode Window Settings"
+  },
+  "plugins": {
+    "manualPluginsTitle": "Manually Loaded Plugins",
+    "nextPluginPlaceholder": "Type the name of a plugin and click Add Plugin.",
+    "addPlugin": "Add Plugin",
+    "manualPluginsPanelHelp": "Enable or disable manually loaded plugins from the following list of available plugins, or manually add a plugin by name below.",
+    "save": "Save"
   }
 }

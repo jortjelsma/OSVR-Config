@@ -29,6 +29,10 @@ module app.main {
                 state: "renderManager"
             },
             {
+                labelTranslateKey: "index.navBarItems.plugins",
+                state: "plugins"
+            },
+            {
                 labelTranslateKey: "index.navBarItems.samples",
                 state: "samples"
             },

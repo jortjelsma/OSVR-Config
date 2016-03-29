@@ -28,11 +28,17 @@ module app.common {
         Includes: IOSVRInclude[];
     }
 
+    export interface IOSVRPlugin {
+        Name: string;
+        enabled?: boolean;
+    }
+
     export interface ISetCurrentConfigResponse { }
 
     export interface IConfigService {
         getCurrent(): ng.IPromise<IOSVRConfig>;
         setCurrent(newConfig: IOSVRConfig): ng.IPromise<ISetCurrentConfigResponse>;
+        getAvailableManualLoadPlugins(): ng.IPromise<IOSVRPlugin[]>
     }
 
     class ConfigService implements IConfigService {
@@ -41,6 +47,10 @@ module app.common {
 
         getCurrent(): ng.IPromise<IOSVRConfig> {
             return this.$http.get("/api/currentconfig").then(result => { return result.data });
+        }
+
+        getAvailableManualLoadPlugins(): ng.IPromise<IOSVRPlugin[]> {
+            return this.$http.get("/api/availablemanualloadplugins").then(result => { return result.data });
         }
 
         setCurrent(newConfig: IOSVRConfig): ng.IPromise<ISetCurrentConfigResponse> {
