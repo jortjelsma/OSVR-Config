@@ -18,8 +18,8 @@
 /// 
 module app.samples {
     interface ISampleConfig {
-        FileName: string;
-        Body: common.IOSVRConfig;
+        fileName: string;
+        body: common.IOSVRConfig;
         showDetail?: boolean;
     }
 
@@ -33,7 +33,7 @@ module app.samples {
         }
 
         clickSampleConfig(sampleConfig: ISampleConfig) {
-            this.configService.setCurrent(sampleConfig.Body);
+            this.configService.setCurrent(sampleConfig.body);
         }
 
         viewSampleConfig(sampleConfig: ISampleConfig) {

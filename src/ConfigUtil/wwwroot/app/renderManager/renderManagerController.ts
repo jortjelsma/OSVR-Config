@@ -43,28 +43,28 @@ module app.renderManager {
                 // if the current render manager config is a referenced file,
                 // replace the renderManagerConfig with the body of the referenced file
                 // (we'll only save it if the user makes changes and hits save)
-                if (angular.isString(this.configRoot.Body.renderManagerConfig) &&
-                    angular.isDefined(this.configRoot.Includes) &&
-                    this.configRoot.Includes !== null) {
+                if (angular.isString(this.configRoot.body.renderManagerConfig) &&
+                    angular.isDefined(this.configRoot.includes) &&
+                    this.configRoot.includes !== null) {
 
-                    for (i = 0; i < this.configRoot.Includes.length; i++) {
-                        var inc = this.configRoot.Includes[i];
-                        if (inc.RelativePath === this.configRoot.Body.renderManagerConfig) {
-                            this.configRoot.Body.renderManagerConfig = inc.Body;
-                            this.configRoot.Includes.splice(i, 1);
-                            this.config = inc.Body.renderManagerConfig;
+                    for (i = 0; i < this.configRoot.includes.length; i++) {
+                        var inc = this.configRoot.includes[i];
+                        if (inc.relativePath === this.configRoot.body.renderManagerConfig) {
+                            this.configRoot.body.renderManagerConfig = inc.body;
+                            this.configRoot.includes.splice(i, 1);
+                            this.config = inc.body.renderManagerConfig;
                             break;
                         }
                     }
-                } else if (!angular.isDefined(this.configRoot.Body.renderManagerConfig) ||
-                    this.configRoot.Body.renderManagerConfig === null) {
-                    this.configRoot.Body.renderManagerConfig = {
+                } else if (!angular.isDefined(this.configRoot.body.renderManagerConfig) ||
+                    this.configRoot.body.renderManagerConfig === null) {
+                    this.configRoot.body.renderManagerConfig = {
                         renderManagerConfig: {}
                     };
 
-                    this.config = this.configRoot.Body.renderManagerConfig.renderManagerConfig;
+                    this.config = this.configRoot.body.renderManagerConfig.renderManagerConfig;
                 } else {
-                    this.config = this.configRoot.Body.renderManagerConfig.renderManagerConfig;
+                    this.config = this.configRoot.body.renderManagerConfig.renderManagerConfig;
                 }
             });
         }

@@ -40,14 +40,14 @@ module app.plugins {
             private configService: app.common.IConfigService) {
             configService.getCurrent().then(currentConfig => {
                 this.currentConfig = currentConfig;
-                this.config = currentConfig.Body;
+                this.config = currentConfig.body;
                 if (!angular.isDefined(this.config.plugins)) {
                     this.config.plugins = [];
                 }
                 return configService.getAvailableManualLoadPlugins().then(plugins => {
                     for (var plugin of this.config.plugins) {
                         this.plugins.push({
-                            Name: plugin,
+                            name: plugin,
                             enabled: true
                         });
                     }
@@ -55,14 +55,14 @@ module app.plugins {
                         // @todo replace with one-line underscore call
                         var alreadyEnabled = false;
                         for (var enabledPlugin of this.plugins) {
-                            if (enabledPlugin.Name === availablePlugin.Name) {
+                            if (enabledPlugin.name === availablePlugin.name) {
                                 alreadyEnabled = true;
                                 break;
                             }
                         }
                         if (!alreadyEnabled) {
                             this.plugins.push({
-                                Name: availablePlugin.Name,
+                                name: availablePlugin.name,
                                 enabled: false
                             });
                         }
@@ -77,7 +77,7 @@ module app.plugins {
 
         addPlugin(plugin: string) {
             this.plugins.push({
-                Name: plugin,
+                name: plugin,
                 enabled: true
             });
         }
@@ -86,7 +86,7 @@ module app.plugins {
             this.config.plugins = [];
             for (var plugin of this.plugins) {
                 if (plugin.enabled) {
-                    this.config.plugins.push(plugin.Name);
+                    this.config.plugins.push(plugin.name);
                 }
             }
             this.configService.setCurrent(this.currentConfig).then(

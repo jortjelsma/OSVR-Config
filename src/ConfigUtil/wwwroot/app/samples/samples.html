@@ -9,14 +9,14 @@
 			<li class="list-group-item" ng-repeat="sampleConfig in vm.sampleConfigs">
 				<div class="row">
 					<div class="col-md-12">
-						<h3>{{sampleConfig.FileName}}</h3>
-						<p class="help-block">{{sampleConfig.Body.Body.description}}</p>
+						<h3>{{sampleConfig.fileName}}</h3>
+						<p class="help-block">{{sampleConfig.body.body.description}}</p>
 					</div>
 				</div>
 				
 				<div class="row" ng-show="sampleConfig.showDetail">
 					<div class="col-md-12">
-						<pre>{{sampleConfig.Body | json}}</pre>
+						<pre>{{sampleConfig.body | json}}</pre>
 					</div>
 				</div>
 				<div class="row">

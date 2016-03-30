@@ -16,16 +16,14 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNet.StaticFiles;
+using Newtonsoft.Json.Serialization;
+using Microsoft.AspNet.Mvc.Formatters;
 
 namespace ConfigUtil
 {
@@ -46,7 +44,15 @@ namespace ConfigUtil
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                var jsonFormatter = (JsonOutputFormatter)options.OutputFormatters.FirstOrDefault(_ => _ is JsonOutputFormatter);
+                if(jsonFormatter != null)
+                {
+                    jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                }
+            });
+
             services.AddInstance<IConfiguration>(Configuration);
         }
 
@@ -70,7 +76,7 @@ namespace ConfigUtil
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseMvc();
+            app.UseMvc();        
         }
 
         // Entry point for the application.

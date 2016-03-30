@@ -19,17 +19,17 @@
 
 module app.common {
     export interface IOSVRInclude {
-        RelativePath: string;
-        Body: any;
+        relativePath: string;
+        body: any;
     }
 
     export interface IOSVRConfig {
-        Body: any;
-        Includes: IOSVRInclude[];
+        body: any;
+        includes: IOSVRInclude[];
     }
 
     export interface IOSVRPlugin {
-        Name: string;
+        name: string;
         enabled?: boolean;
     }
 
