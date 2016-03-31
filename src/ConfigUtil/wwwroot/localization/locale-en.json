@@ -64,18 +64,23 @@
       "infrequentlyUsedSettings": "Show Infrequently Used Settings",
       "directModeEnabled": "Direct Mode Enabled",
       "directDisplayIndex": "Direct Display Index",
+      "directDisplayIndexHelp": "Use -1 to automatically find the right display index based on resolution or specify an explicit direct mode display index.",
       "directHighPriorityEnabled": "Direct High Priority Enabled",
+      "directHighPriorityEnabledHelp": "RenderManager will use a high-priority graphics device to render distortion and time-warp, if available.",
       "numBuffers": "Number of Render Manager Buffers",
       "numBuffersHelp": "Use 1 for front-buffer rendering or 2 for double buffering.",
       "renderOverfillFactor": "Overfill Factor",
       "renderOverfillFactorHelp": "Specify a value between 1.0 and 2.0. A larger value may increase field of view slightly while moving your head, at the cost of performance.",
       "verticalSyncEnabled": "Vertical Sync Enabled",
       "verticalSyncBlockRenderingEnabled": "Vertical Sync Block Rendering Enabled",
+      "verticalSyncBlockRenderingEnabledHelp": "",
       "window": {
         "title": "Title",
         "fullScreenEnabled": "Fullscreen Enabled",
         "xPosition": "X Position",
-        "yPosition": "Y Position"
+        "yPosition": "Y Position",
+        "positionHelp": "X and Y position determine the window location in extended mode.",
+        "positionFullscreenHelp": "X and Y position determine which screen to make fullscreen in extended mode."
       },
       "display": {
         "rotation": "Rotation",
@@ -85,11 +90,14 @@
       "timeWarp": {
         "enabled": "Enabled",
         "asynchronous": "Asynchronous",
-        "maxMsBeforeVSync": "Max Ms Before VSync"
+        "asynchronousHelp": "Asynchronous Time-Warp performs the time-warp operation in a separate thread, rendering the time-warped image just prior to vsync even if the next frame has not completed rendering in time.",
+        "maxMsBeforeVSync": "Max Ms Before VSync",
+        "maxMsBeforeVSyncHelp": "The amount of time prior to VSync reserved for rendering distortion correction and time-warp."
       }
     },
     "displaySettingsPanelTitle": "Display Settings",
     "timeWarpSettingsPanelTitle": "Time-Warp Settings",
+    "timeWarpSettingsPanelDescription": "Time-Warp reduces perceived latency by making small adjustments to the final image based on head movement.",
     "generalSettingsPanelTitle": "General Settings",
     "windowPanelTitle": "Extended Mode Window Settings"
   },
