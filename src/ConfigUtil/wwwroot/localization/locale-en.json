@@ -5,6 +5,7 @@
     "navBarItems": {
       "samples": "Samples",
       "tools": "Tools",
+      "displays": "Displays",
       "plugins": "Plugins",
       "renderManager": "Rendering"
     }
@@ -13,7 +14,20 @@
     "jumboTron": {
       "title": "OSVR Config",
       "description": "This utility will help you configure OSVR.",
-      "learnMore":  "Learn more"
+      "learnMore": "Learn more"
+    }
+  },
+  "displays": {
+    "panelTitle": "Available Displays",
+    "panelDescription": "Select a display from one of the following available displays to set it as the current display. Some HMDs require additional configuration - see the Samples page to see examples.",
+    "overwriteWarning": "Note: This will overwrite the current configuration.",
+    "useDisplay": "Use",
+    "viewDisplay": "View",
+    "labels": {
+      "vendor": "Vendor",
+      "model": "Model",
+      "Version": "Version",
+      "Note": "Note"
     }
   },
   "samples": {

@@ -33,12 +33,20 @@ module app.common {
         enabled?: boolean;
     }
 
+    export interface IOSVRDisplay {
+        fileName: string;
+        relativePath: string;
+        body: any;
+        showDetail?: boolean;
+    }
+
     export interface ISetCurrentConfigResponse { }
 
     export interface IConfigService {
         getCurrent(): ng.IPromise<IOSVRConfig>;
         setCurrent(newConfig: IOSVRConfig): ng.IPromise<ISetCurrentConfigResponse>;
         getAvailableManualLoadPlugins(): ng.IPromise<IOSVRPlugin[]>
+        getAvailableDisplays(): ng.IPromise<IOSVRDisplay[]>;
     }
 
     class ConfigService implements IConfigService {
@@ -49,12 +57,16 @@ module app.common {
             return this.$http.get("/api/currentconfig").then(result => { return result.data });
         }
 
+        setCurrent(newConfig: IOSVRConfig): ng.IPromise<ISetCurrentConfigResponse> {
+            return this.$http.post("/api/currentconfig", newConfig);
+        }
+
         getAvailableManualLoadPlugins(): ng.IPromise<IOSVRPlugin[]> {
             return this.$http.get("/api/availablemanualloadplugins").then(result => { return result.data });
         }
 
-        setCurrent(newConfig: IOSVRConfig): ng.IPromise<ISetCurrentConfigResponse> {
-            return this.$http.post("/api/currentconfig", newConfig);
+        getAvailableDisplays(): ng.IPromise<IOSVRDisplay[]> {
+            return this.$http.get("/api/availabledisplays").then(result => { return result.data; });
         }
     }
 

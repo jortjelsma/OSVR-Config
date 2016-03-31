@@ -26,6 +26,7 @@ module modules {
             "app.samples",
             "app.renderManager",
             "app.plugins",
+            "app.displays",
             "pascalprecht.translate"
         ])
         .config(["$stateProvider", "$urlRouterProvider", "$translateProvider",
