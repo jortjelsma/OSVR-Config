@@ -17,6 +17,12 @@
       "learnMore": "Learn more"
     }
   },
+  "serverRootNotDefined": {
+    "panelTitle": "Could not find your OSVR Server directory.",
+    "panelDescription": "OSVR-Config could not find the OSVR Server directory. Typically this is configured when you run the OSVR SDK or Runtime installers, but can be configured manually by setting the OSVR_SERVER_ROOT environment variable.",
+    "downloadOSVRRuntime": "Download OSVR Runtime",
+    "downloadOSVRSDK": "Download OSVR SDK"
+  },
   "displays": {
     "panelTitle": "Available Displays",
     "panelDescription": "Select a display from one of the following available displays to set it as the current display. Some HMDs require additional configuration - see the Samples page to see examples.",

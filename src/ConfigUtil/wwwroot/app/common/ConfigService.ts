@@ -47,6 +47,7 @@ module app.common {
         setCurrent(newConfig: IOSVRConfig): ng.IPromise<ISetCurrentConfigResponse>;
         getAvailableManualLoadPlugins(): ng.IPromise<IOSVRPlugin[]>
         getAvailableDisplays(): ng.IPromise<IOSVRDisplay[]>;
+        getCurrentServerRoot(): ng.IPromise<string>;
     }
 
     class ConfigService implements IConfigService {
@@ -67,6 +68,10 @@ module app.common {
 
         getAvailableDisplays(): ng.IPromise<IOSVRDisplay[]> {
             return this.$http.get("/api/availabledisplays").then(result => { return result.data; });
+        }
+
+        getCurrentServerRoot(): ng.IPromise<string> {
+            return this.$http.get("/api/serverroot").then(result => { return result.data; });
         }
     }
 

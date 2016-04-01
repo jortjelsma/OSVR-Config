@@ -46,13 +46,28 @@ module app.main {
             }
         ];
 
+        serverRoot: string;
+
         isActive(navBarItem: INavbarItem): boolean {
             return this.$state.current.name == navBarItem.state;
         }
 
-        static $inject = ["$state"];
-        constructor(private $state: ng.ui.IStateService) { }
+        serverRootDefined(): boolean {
+            return angular.isDefined(this.serverRoot) &&
+                angular.isString(this.serverRoot) &&
+                this.serverRoot.length > 0;
+        }
+
+        static $inject = ["$state", "app.common.ConfigService"];
+        constructor(private $state: ng.ui.IStateService, private configService: app.common.IConfigService) {
+            configService.getCurrentServerRoot().then(serverRoot => {
+                this.serverRoot = serverRoot;
+                if (!this.serverRootDefined()) {
+                    this.$state.go("serverRootNotDefined");
+                }
+            });
+        }
     }
-    angular.module("app.main", [])
+    angular.module("app.main", ["app.common.ConfigService", "ui.router"])
         .controller("app.main.MainController", MainController);
 }
