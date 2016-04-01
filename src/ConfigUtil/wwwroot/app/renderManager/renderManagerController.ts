@@ -83,6 +83,13 @@ module app.renderManager {
                     this.$scope.renderManagerForm.$setPristine();
                 });
         }
+
+        inputColumnClassObject() {
+            return {
+                'col-md-6': this.showConfigJson,
+                'col-md-4': !this.showConfigJson
+            };
+        }
     }
 
     angular.module("app.renderManager", ["app.common.ConfigService", "ui.router"])

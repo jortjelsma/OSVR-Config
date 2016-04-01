@@ -1,212 +1,217 @@
-﻿<form name="renderManagerForm" novalidate>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title" data-translate="renderManager.generalSettingsPanelTitle"></h3>
-		</div>
+﻿<div class="row">
+	<div ng-class="{'col-md-6': vm.showConfigJson, 'col-md-12': !vm.showConfigJson }">
+		<form name="renderManagerForm" novalidate>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title" data-translate="renderManager.generalSettingsPanelTitle"></h3>
+				</div>
 
-		<div class="panel-body">
-			<div class="checkbox">
-				<label>
-					<input type="checkbox"
-						   ng-model="vm.config.directModeEnabled" />
-					{{'renderManager.labels.directModeEnabled' | translate}}
-				</label>
-			</div>
+				<div class="panel-body">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"
+								   ng-model="vm.config.directModeEnabled" />
+							{{'renderManager.labels.directModeEnabled' | translate}}
+						</label>
+					</div>
 
-			<div class="checkbox" ng-show="vm.showAdvanced && vm.config.directModeEnabled">
-				<label>
-					<input type="checkbox"
-						   ng-model="vm.config.directHighPriorityEnabled" />
-					{{'renderManager.labels.directHighPriorityEnabled' | translate}}
-				</label>
-				<p class="help-block" data-translate="renderManager.labels.directHighPriorityEnabledHelp"></p>
-			</div>
+					<div class="checkbox" ng-show="vm.showAdvanced && vm.config.directModeEnabled">
+						<label>
+							<input type="checkbox"
+								   ng-model="vm.config.directHighPriorityEnabled" />
+							{{'renderManager.labels.directHighPriorityEnabled' | translate}}
+						</label>
+						<p class="help-block" data-translate="renderManager.labels.directHighPriorityEnabledHelp"></p>
+					</div>
 
-			<div class="checkbox" ng-show="vm.showAdvanced && vm.config.directModeEnabled">
-				<label>
-					<input type="checkbox"
-						   ng-model="vm.config.verticalSyncEnabled" />
-					{{'renderManager.labels.verticalSyncEnabled' | translate}}
-				</label>
-			</div>
+					<div class="checkbox" ng-show="vm.showAdvanced && vm.config.directModeEnabled">
+						<label>
+							<input type="checkbox"
+								   ng-model="vm.config.verticalSyncEnabled" />
+							{{'renderManager.labels.verticalSyncEnabled' | translate}}
+						</label>
+					</div>
 
-			<div class="checkbox" ng-show="vm.showAdvanced && vm.config.directModeEnabled">
-				<label>
-					<input type="checkbox"
-						   ng-model="vm.config.verticalSyncBlockRenderingEnabled" />
-					{{'renderManager.labels.verticalSyncBlockRenderingEnabled' | translate}}
-				</label>
-			</div>
+					<div class="checkbox" ng-show="vm.showAdvanced && vm.config.directModeEnabled">
+						<label>
+							<input type="checkbox"
+								   ng-model="vm.config.verticalSyncBlockRenderingEnabled" />
+							{{'renderManager.labels.verticalSyncBlockRenderingEnabled' | translate}}
+						</label>
+					</div>
 
-			<div class="row" ng-show="vm.showAdvanced && vm.config.directModeEnabled">
-				<div class="form-group col-md-4">
-					<label for="directDisplayIndex"
-						   data-translate="renderManager.labels.directDisplayIndex"></label>
-					<input type="number" class="form-control" id="directDisplayIndex"
-						   step="1"
-						   ng-model="vm.config.directDisplayIndex" />
-					<p class="help-block" data-translate="renderManager.labels.directDisplayIndexHelp"></p>
+					<div class="row" ng-show="vm.showAdvanced && vm.config.directModeEnabled">
+						<div class="form-group" ng-class="vm.inputColumnClassObject()">
+							<label for="directDisplayIndex"
+								   data-translate="renderManager.labels.directDisplayIndex"></label>
+							<input type="number" class="form-control" id="directDisplayIndex"
+								   step="1"
+								   ng-model="vm.config.directDisplayIndex" />
+							<p class="help-block" data-translate="renderManager.labels.directDisplayIndexHelp"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group" 
+							 ng-class="vm.inputColumnClassObject()"
+							 ng-show="vm.showAdvanced && vm.config.directModeEnabled">
+							<label for="renderOverfillFactor"
+								   data-translate="renderManager.labels.renderOverfillFactor"></label>
+							<input type="number" class="form-control" id="renderOverfillFactor"
+								   step="0.1"
+								   ng-model="vm.config.renderOverfillFactor" />
+							<p class="help-block" data-translate="renderManager.labels.renderOverfillFactorHelp"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group" 
+							 ng-class="vm.inputColumnClassObject()"
+							 ng-show="vm.showAdvanced && vm.config.directModeEnabled">
+							<label for="numBuffers"
+								   data-translate="renderManager.labels.numBuffers"></label>
+							<input type="number" class="form-control" id="numBuffers"
+								   step="1"
+								   ng-model="vm.config.numBuffers" />
+							<p class="help-block" data-translate="renderManager.labels.numBuffersHelp"></p>
+						</div>
+					</div>
 				</div>
 			</div>
+
+			<div class="panel panel-default" ng-show="!vm.config.directModeEnabled">
+				<div class="panel-heading">
+					<h3 class="panel-title" data-translate="renderManager.windowPanelTitle"></h3>
+				</div>
+				<div class="panel-body">
+
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"
+								   ng-model="vm.config.window.fullScreenEnabled" />
+							{{'renderManager.labels.window.fullScreenEnabled' | translate}}
+						</label>
+					</div>
+
+					<div class="row" ng-hide="vm.config.window.fullScreenEnabled">
+						<div class="form-group"
+							 ng-class="vm.inputColumnClassObject()">
+							<label for="windowTitle"
+								   data-translate="renderManager.labels.window.title"></label>
+							<input type="text" class="form-control" id="windowTitle"
+								   ng-model="vm.config.window.title" />
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-sm-6 col-xs-6 col-xs-6"
+							 ng-class="vm.inputColumnClassObject()">
+							<label for="windowXPosition"
+								   data-translate="renderManager.labels.window.xPosition"></label>
+							<input type="number" class="form-control" id="windowXPosition"
+								   step="0.1"
+								   ng-model="vm.config.window.xPosition" />
+						</div>
+
+						<div class="form-group col-sm-6 col-xs-6"
+							 ng-class="vm.inputColumnClassObject()">
+							<label for="windowYPosition"
+								   data-translate="renderManager.labels.window.yPosition"></label>
+							<input type="number" class="form-control" id="windowYPosition"
+								   step="0.1"
+								   ng-model="vm.config.window.yPosition" />
+						</div>
+					</div>
+					<p class="help-block" ng-hide="vm.config.window.fullScreenEnabled" data-translate="renderManager.labels.window.positionHelp"></p>
+					<p class="help-block" ng-show="vm.config.window.fullScreenEnabled" data-translate="renderManager.labels.window.positionFullscreenHelp"></p>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title" data-translate="renderManager.displaySettingsPanelTitle"></h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="form-group"
+							 ng-class="vm.inputColumnClassObject()">
+							<label for="displayRotation"
+								   data-translate="renderManager.labels.display.rotation"></label>
+							<input type="number" class="form-control" id="displayRotation"
+								   step="90"
+								   ng-model="vm.config.display.rotation" />
+							<p class="help-block" data-translate="renderManager.labels.display.rotationHelp"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title" data-translate="renderManager.timeWarpSettingsPanelTitle"></h3>
+				</div>
+				<div class="panel-body">
+					<p class="help-block" data-translate="renderManager.timeWarpSettingsPanelDescription"></p>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"
+								   ng-model="vm.config.timeWarp.enabled" />
+							{{'renderManager.labels.timeWarp.enabled' | translate}}
+						</label>
+
+					</div>
+
+					<div class="checkbox" ng-show="vm.config.timeWarp.enabled">
+						<label>
+							<input type="checkbox"
+								   ng-model="vm.config.timeWarp.asynchronous" />
+							{{'renderManager.labels.timeWarp.asynchronous' | translate}}
+						</label>
+						<p class="help-block" data-translate="renderManager.labels.timeWarp.asynchronousHelp"></p>
+					</div>
+
+					<div class="row" ng-show="vm.showAdvanced && vm.config.timeWarp.enabled">
+						<div class="form-group"
+							 ng-class="vm.inputColumnClassObject()">
+							<label for="timeWarpMaxMsBeforeVSync"
+								   data-translate="renderManager.labels.timeWarp.maxMsBeforeVSync"></label>
+							<input type="number" class="form-control" id="timeWarpMaxMsBeforeVSync"
+								   step="1"
+								   ng-model="vm.config.timeWarp.maxMsBeforeVSync" />
+							<p class="help-block" data-translate="renderManager.labels.timeWarp.maxMsBeforeVSyncHelp"></p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- I love CSS -->
 			<div class="row">
-				<div class="form-group col-md-4" ng-show="vm.showAdvanced && vm.config.directModeEnabled">
-					<label for="renderOverfillFactor"
-						   data-translate="renderManager.labels.renderOverfillFactor"></label>
-					<input type="number" class="form-control" id="renderOverfillFactor"
-						   step="0.1"
-						   ng-model="vm.config.renderOverfillFactor" />
-					<p class="help-block" data-translate="renderManager.labels.renderOverfillFactorHelp"></p>
+				<div class="col-md-12">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"
+								   ng-model="vm.showAdvanced" />{{'renderManager.labels.infrequentlyUsedSettings' | translate}}
+						</label>
+					</div>
 				</div>
 			</div>
+
+			<!-- Save -->
 			<div class="row">
-				<div class="form-group col-md-4" ng-show="vm.showAdvanced && vm.config.directModeEnabled">
-					<label for="numBuffers"
-						   data-translate="renderManager.labels.numBuffers"></label>
-					<input type="number" class="form-control" id="numBuffers"
-						   step="1"
-						   ng-model="vm.config.numBuffers" />
-					<p class="help-block" data-translate="renderManager.labels.numBuffersHelp"></p>
+				<div class="col-md-12">
+					<button class="btn btn-primary"
+							data-translate="renderManager.save"
+							ng-disabled="renderManagerForm.$pristine"
+							ng-click="vm.save()"></button>
+					<a href=""
+					   class="btn btn-link"
+					   data-translate="{{vm.showHideConfigJsonButtonTextKey()}}"
+					   ng-click="vm.toggleShowConfigJson()"></a>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
-
-	<div class="panel panel-default" ng-show="!vm.config.directModeEnabled">
-		<div class="panel-heading">
-			<h3 class="panel-title" data-translate="renderManager.windowPanelTitle"></h3>
-		</div>
-		<div class="panel-body">
-
-			<div class="checkbox">
-				<label>
-					<input type="checkbox"
-						   ng-model="vm.config.window.fullScreenEnabled" />
-					{{'renderManager.labels.window.fullScreenEnabled' | translate}}
-				</label>
-			</div>
-
-			<div class="row" ng-hide="vm.config.window.fullScreenEnabled">
-				<div class="form-group col-md-3">
-					<label for="windowTitle"
-						   data-translate="renderManager.labels.window.title"></label>
-					<input type="text" class="form-control" id="windowTitle"
-						   ng-model="vm.config.window.title" />
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group col-md-3 col-sm-6 col-xs-6 col-xs-6">
-					<label for="windowXPosition"
-						   data-translate="renderManager.labels.window.xPosition"></label>
-					<input type="number" class="form-control" id="windowXPosition"
-						   step="0.1"
-						   ng-model="vm.config.window.xPosition" />
-				</div>
-
-				<div class="form-group col-md-3 col-sm-6 col-xs-6">
-					<label for="windowYPosition"
-						   data-translate="renderManager.labels.window.yPosition"></label>
-					<input type="number" class="form-control" id="windowYPosition"
-						   step="0.1"
-						   ng-model="vm.config.window.yPosition" />
-				</div>
-			</div>
-			<p class="help-block" ng-hide="vm.config.window.fullScreenEnabled" data-translate="renderManager.labels.window.positionHelp"></p>
-			<p class="help-block" ng-show="vm.config.window.fullScreenEnabled" data-translate="renderManager.labels.window.positionFullscreenHelp"></p>
-		</div>
-	</div>
-
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title" data-translate="renderManager.displaySettingsPanelTitle"></h3>
-		</div>
-		<div class="panel-body">
-			<div class="row">
-				<div class="form-group col-md-3">
-					<label for="displayRotation"
-						   data-translate="renderManager.labels.display.rotation"></label>
-					<input type="number" class="form-control" id="displayRotation"
-						   step="90"
-						   ng-model="vm.config.display.rotation" />
-					<p class="help-block" data-translate="renderManager.labels.display.rotationHelp"></p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title" data-translate="renderManager.timeWarpSettingsPanelTitle"></h3>
-		</div>
-		<div class="panel-body">
-			<p class="help-block" data-translate="renderManager.timeWarpSettingsPanelDescription"></p>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox"
-						   ng-model="vm.config.timeWarp.enabled" />
-					{{'renderManager.labels.timeWarp.enabled' | translate}}
-				</label>
-				
-			</div>
-
-			<div class="checkbox" ng-show="vm.config.timeWarp.enabled">
-				<label>
-					<input type="checkbox"
-						   ng-model="vm.config.timeWarp.asynchronous" />
-					{{'renderManager.labels.timeWarp.asynchronous' | translate}}
-				</label>
-				<p class="help-block" data-translate="renderManager.labels.timeWarp.asynchronousHelp"></p>
-			</div>
-
-			<div class="row" ng-show="vm.showAdvanced && vm.config.timeWarp.enabled">
-				<div class="form-group col-md-3">
-					<label for="timeWarpMaxMsBeforeVSync"
-						   data-translate="renderManager.labels.timeWarp.maxMsBeforeVSync"></label>
-					<input type="number" class="form-control" id="timeWarpMaxMsBeforeVSync"
-						   step="1"
-						   ng-model="vm.config.timeWarp.maxMsBeforeVSync" />
-					<p class="help-block" data-translate="renderManager.labels.timeWarp.maxMsBeforeVSyncHelp"></p>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-	<!-- I love CSS -->
-	<div class="row">
-		<div class="col-md-12">
-			<div class="checkbox">
-				<label>
-					<input type="checkbox"
-						   ng-model="vm.showAdvanced" />{{'renderManager.labels.infrequentlyUsedSettings' | translate}}
-				</label>
-			</div>
-		</div>
-	</div>
-
-	<!-- Save -->
-	<div class="row">
-		<div class="col-md-12">
-			<button class="btn btn-primary"
-					data-translate="renderManager.save"
-					ng-disabled="renderManagerForm.$pristine"
-					ng-click="vm.save()"></button>
-			<a href=""
-				class="btn btn-link"
-				data-translate="{{vm.showHideConfigJsonButtonTextKey()}}"
-				ng-click="vm.toggleShowConfigJson()"></a>
-		</div>
-	</div>
-</form>
-
-<div class="row">
-	<div class="col-md-12">
-		<p></p>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-12" ng-show="vm.showConfigJson">
+	<div class="col-md-6" ng-show="vm.showConfigJson">
 		<pre>{{vm.config | json}}</pre>
 	</div>
 </div>
+
