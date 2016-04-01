@@ -48,6 +48,7 @@ module app.common {
         getAvailableManualLoadPlugins(): ng.IPromise<IOSVRPlugin[]>
         getAvailableDisplays(): ng.IPromise<IOSVRDisplay[]>;
         getCurrentServerRoot(): ng.IPromise<string>;
+        keepAlive(): ng.IPromise<any>;
     }
 
     class ConfigService implements IConfigService {
@@ -72,6 +73,10 @@ module app.common {
 
         getCurrentServerRoot(): ng.IPromise<string> {
             return this.$http.get("/api/serverroot").then(result => { return result.data; });
+        }
+
+        keepAlive(): ng.IPromise<any> {
+            return this.$http.post("/api/keepAlive", {});
         }
     }
 

@@ -24,11 +24,24 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNet.Mvc.Formatters;
+using System;
+using System.Threading;
 
 namespace ConfigUtil
 {
     public class Startup
     {
+        static object timeoutLock = new object();
+        static int pingNumber = 0;
+
+        public static void Ping()
+        {
+            lock(timeoutLock)
+            {
+                pingNumber++;
+            }
+        }
+
         public Startup(IHostingEnvironment env)
         {
             // Set up configuration sources.
@@ -36,6 +49,21 @@ namespace ConfigUtil
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+            var thread = new Thread(() =>
+            {
+                bool finished = false;
+                while (!finished)
+                {
+                    int lastPingNumber = pingNumber;
+                    Thread.Sleep(TimeSpan.FromSeconds(5));
+                    if(lastPingNumber == pingNumber)
+                    {
+                        finished = true;
+                        Environment.FailFast("Not really a failure. Just timed out and CoreCLR doesn't have a nice way to exit gracefully yet.");
+                    }
+                }
+            });
+            thread.Start();
         }
 
         public IConfigurationRoot Configuration { get; set; }

@@ -58,14 +58,21 @@ module app.main {
                 this.serverRoot.length > 0;
         }
 
-        static $inject = ["$state", "app.common.ConfigService"];
-        constructor(private $state: ng.ui.IStateService, private configService: app.common.IConfigService) {
+        static $inject = ["$timeout", "$state", "app.common.ConfigService"];
+        constructor(private $timeout: ng.ITimeoutService, private $state: ng.ui.IStateService, private configService: app.common.IConfigService) {
             configService.getCurrentServerRoot().then(serverRoot => {
                 this.serverRoot = serverRoot;
                 if (!this.serverRootDefined()) {
                     this.$state.go("serverRootNotDefined");
                 }
             });
+
+            var timeoutFunc = () => {
+                configService.keepAlive();
+                $timeout(timeoutFunc, 3000);
+            };
+
+            $timeout(timeoutFunc, 1000);
         }
     }
     angular.module("app.main", ["app.common.ConfigService", "ui.router"])
