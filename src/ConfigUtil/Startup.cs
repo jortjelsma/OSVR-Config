@@ -54,12 +54,19 @@ namespace ConfigUtil
                 bool finished = false;
                 while (!finished)
                 {
-                    int lastPingNumber = pingNumber;
-                    Thread.Sleep(TimeSpan.FromSeconds(5));
-                    if(lastPingNumber == pingNumber)
+                    int lastPingNumber = -1;
+                    lock(timeoutLock)
                     {
-                        finished = true;
-                        Environment.FailFast("Not really a failure. Just timed out and CoreCLR doesn't have a nice way to exit gracefully yet.");
+                        lastPingNumber = pingNumber;
+                    }
+                    Thread.Sleep(TimeSpan.FromSeconds(5));
+                    lock(timeoutLock)
+                    {
+                        if (pingNumber > 0 && lastPingNumber == pingNumber)
+                        {
+                            finished = true;
+                            Environment.FailFast("Not really a failure. Just timed out and CoreCLR doesn't have a nice way to exit gracefully yet.");
+                        }
                     }
                 }
             });
