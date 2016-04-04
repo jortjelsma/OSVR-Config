@@ -26,8 +26,6 @@ using Microsoft.Extensions.Configuration;
 using ConfigUtil.Common;
 using System.IO;
 
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace ConfigUtil.Controllers
 {
     [Route("api/[controller]")]
@@ -43,20 +41,8 @@ namespace ConfigUtil.Controllers
         [HttpGet]
         public IEnumerable<ManualLoadPlugin> Get()
         {
-            var configDir = this.config.GetOSVRServerDirectory();
-            var pluginsPath = Path.Combine(configDir, "osvr-plugins-0");
-            return from file in Directory.GetFiles(pluginsPath)
-                   where file.Contains("manualload")
-                   select CreateManualLoadPlugin(file);
-        }
-
-        private ManualLoadPlugin CreateManualLoadPlugin(string fileName)
-        {
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(fileName));
-            return new ManualLoadPlugin()
-            {
-                Name = fileNameWithoutExtension,
-            };
+            var serverPath = this.config.GetOSVRServerDirectory();
+            return ManualLoadPlugin.GetAvailablePlugins(serverPath);
         }
     }
 }

@@ -16,18 +16,11 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using ConfigUtil.Models;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using ConfigUtil.Common;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ConfigUtil.Controllers
 {
@@ -43,18 +36,10 @@ namespace ConfigUtil.Controllers
 
         // GET: api/sampleconfigs
         [HttpGet]
-        public IEnumerable<ServerConfigPreset> Get()
+        public IEnumerable<ServerConfigSample> Get()
         {
             var serverPath = this.config.GetOSVRServerDirectory();
-            var displaysPath = System.IO.Path.Combine(serverPath, "sample-configs");
-
-            return from displayFile in System.IO.Directory.EnumerateFiles(displaysPath)
-                   where displayFile.Contains("osvr_server_config")
-                   select new ServerConfigPreset()
-                   {
-                       FileName = System.IO.Path.GetFileName(displayFile),
-                       Body = OSVRConfig.Read(displayFile, config),
-                   };
+            return ServerConfigSample.GetAvailableSamples(serverPath);
         }
     }
 }

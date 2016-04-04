@@ -16,16 +16,10 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Configuration;
 using ConfigUtil.Common;
-using System.Diagnostics;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+using ConfigUtil.Models;
 
 namespace ConfigUtil.Controllers
 {
@@ -42,12 +36,8 @@ namespace ConfigUtil.Controllers
         [HttpPost]
         public void Post()
         {
-            var osvrServerPath = this.config.GetOSVRServerDirectory();
-            var osvrServerExe = System.IO.Path.Combine(osvrServerPath, "osvr_server.exe");
-            var startInfo = new ProcessStartInfo();
-            startInfo.FileName = osvrServerExe;
-            startInfo.WorkingDirectory = osvrServerPath;
-            Process.Start(startInfo);
+            var serverPath = this.config.GetOSVRServerDirectory();
+            OSVRServer.Start(serverPath);
         }
     }
 }

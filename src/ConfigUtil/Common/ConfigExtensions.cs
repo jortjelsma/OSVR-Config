@@ -16,11 +16,8 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using ConfigUtil.Models;
 
 namespace ConfigUtil.Common
 {
@@ -29,12 +26,7 @@ namespace ConfigUtil.Common
         public static string GetOSVRServerDirectory(this IConfiguration config)
         {
             var envValue = config.Get<string>("OSVR_SERVER_ROOT", null);
-            if(envValue != null && envValue.Contains(';'))
-            {
-                var values = envValue.Split(';');
-                return values.Last();
-            }
-            return envValue ?? "";
+            return OSVRServer.ParseServerPath(envValue);
         }
     }
 }

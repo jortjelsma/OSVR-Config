@@ -16,12 +16,12 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using ConfigUtil.Common;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ConfigUtil.Models
 {
@@ -30,10 +30,9 @@ namespace ConfigUtil.Models
         public JObject Body { get; set; }
         public IEnumerable<OSVRInclude> Includes { get; set; }
 
-        public static OSVRConfig Read(string filePath, IConfiguration config)
+        public static OSVRConfig Read(string filePath, string serverRoot)
         {
             var ret = new OSVRConfig();
-            var serverRoot = config.GetOSVRServerDirectory();
             var includes = new List<OSVRInclude>();
             ret.Includes = includes;
 
@@ -60,11 +59,26 @@ namespace ConfigUtil.Models
             return ret;
         }
 
-        public static OSVRConfig GetCurrent(IConfiguration config)
+        public static OSVRConfig GetCurrent(IConfiguration config, string serverRoot)
         {
-            var serverRoot = config.GetOSVRServerDirectory();
             var configPath = Path.Combine(serverRoot, "osvr_server_config.json");
-            return OSVRConfig.Read(configPath, config);
+            return OSVRConfig.Read(configPath, serverRoot);
+        }
+
+        public static void SetCurrent(OSVRConfig value, string serverRoot)
+        {
+            var configPath = Path.Combine(serverRoot, "osvr_server_config.json");
+
+            // ignoring includes.
+            var mainConfigBody = value.Body;
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.NullValueHandling = NullValueHandling.Ignore;
+            serializer.Formatting = Formatting.Indented;
+            using (StreamWriter sw = System.IO.File.CreateText(configPath))
+            using (JsonWriter jw = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(jw, mainConfigBody);
+            }
         }
     }
 }

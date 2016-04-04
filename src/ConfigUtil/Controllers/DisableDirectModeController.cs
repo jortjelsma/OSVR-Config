@@ -16,16 +16,10 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Configuration;
-using System.Diagnostics;
 using ConfigUtil.Common;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+using ConfigUtil.Models;
 
 namespace ConfigUtil.Controllers
 {
@@ -43,11 +37,8 @@ namespace ConfigUtil.Controllers
         [HttpPost]
         public void Post()
         {
-            var renderManagerPath = this.config.GetOSVRServerDirectory();
-            var enableDirectModePath = System.IO.Path.Combine(renderManagerPath, "DisableOSVRDirectMode.exe");
-            var enableDirectModePathAMD = System.IO.Path.Combine(renderManagerPath, "DisableOSVRDirectModeAMD.exe");
-            Process.Start(enableDirectModePath);
-            Process.Start(enableDirectModePathAMD);
+            var serverPath = this.config.GetOSVRServerDirectory();
+            DirectMode.Disable(serverPath);
         }
     }
 }

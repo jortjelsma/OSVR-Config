@@ -23,9 +23,22 @@ using System.Threading.Tasks;
 
 namespace ConfigUtil.Models
 {
-    public class ServerConfigPreset
+    public class ServerConfigSample
     {
         public string FileName { get; set; }
         public OSVRConfig Body { get; set; }
+
+        public static IEnumerable<ServerConfigSample> GetAvailableSamples(string serverPath)
+        {
+            var displaysPath = System.IO.Path.Combine(serverPath, "sample-configs");
+
+            return from displayFile in System.IO.Directory.EnumerateFiles(displaysPath)
+                   where displayFile.Contains("osvr_server_config")
+                   select new ServerConfigSample()
+                   {
+                       FileName = System.IO.Path.GetFileName(displayFile),
+                       Body = OSVRConfig.Read(displayFile, serverPath),
+                   };
+        }
     }
 }

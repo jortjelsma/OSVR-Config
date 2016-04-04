@@ -27,5 +27,16 @@ namespace ConfigUtil.Models
             }
             return ret;
         }
+
+        public static IEnumerable<OSVRDisplay> GetAvailableDisplays(string serverPath)
+        {
+            string displaysPath = Path.Combine(serverPath, "displays");
+            List<OSVRDisplay> ret = new List<OSVRDisplay>();
+            foreach (var displayFile in Directory.GetFiles(displaysPath))
+            {
+                ret.Add(OSVRDisplay.ReadFrom(displayFile, serverPath));
+            }
+            return ret;
+        }
     }
 }

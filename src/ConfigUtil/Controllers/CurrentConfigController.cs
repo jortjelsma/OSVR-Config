@@ -43,7 +43,8 @@ namespace ConfigUtil.Controllers
         [HttpGet]
         public OSVRConfig Get()
         {
-            return OSVRConfig.GetCurrent(config);
+            var serverPath = config.GetOSVRServerDirectory();
+            return OSVRConfig.GetCurrent(config, serverPath);
         }
 
         // POST api/currentconfig
@@ -51,18 +52,7 @@ namespace ConfigUtil.Controllers
         public void Post([FromBody]OSVRConfig value)
         {
             var serverPath = config.GetOSVRServerDirectory();
-            var configPath = Path.Combine(serverPath, "osvr_server_config.json");
-
-            // ignoring includes.
-            var mainConfigBody = value.Body;
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.NullValueHandling = NullValueHandling.Ignore;
-            serializer.Formatting = Formatting.Indented;
-            using(StreamWriter sw = System.IO.File.CreateText(configPath))
-            using(JsonWriter jw = new JsonTextWriter(sw))
-            {
-                serializer.Serialize(jw, mainConfigBody);
-            }
+            OSVRConfig.SetCurrent(value, serverPath);
         }
     }
 }

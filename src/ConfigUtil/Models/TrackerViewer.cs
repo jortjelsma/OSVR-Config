@@ -18,31 +18,16 @@
 /// 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.IO;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Extensions.Configuration;
-using ConfigUtil.Models;
-using ConfigUtil.Common;
+using System.Diagnostics;
 
-namespace ConfigUtil.Controllers
+namespace ConfigUtil.Models
 {
-    [Route("api/[controller]")]
-    public class AvailableDisplaysController : Controller
+    public static class TrackerViewer
     {
-        private readonly IConfiguration config;
-        public AvailableDisplaysController(IConfiguration config)
+        public static void Start(IEnumerable<string> paths, string serverPath)
         {
-            this.config = config;
-        }
-
-        // GET: api/availabledisplays
-        [HttpGet]
-        public IEnumerable<OSVRDisplay> Get()
-        {
-            string serverPath = this.config.GetOSVRServerDirectory();
-            return OSVRDisplay.GetAvailableDisplays(serverPath);
+            var trackerViewerPath = System.IO.Path.Combine(serverPath, "OSVRTrackerView.exe");
+            Process.Start(trackerViewerPath, String.Join(" ", paths));
         }
     }
 }

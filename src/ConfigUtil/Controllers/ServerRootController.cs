@@ -16,15 +16,9 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Configuration;
 using ConfigUtil.Common;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ConfigUtil.Controllers
 {
