@@ -26,7 +26,7 @@ namespace ConfigUtil.Common
 {
     public static class KeepAlive
     {
-        static Thread thread;
+        //static Thread thread;
         static int pingNumber = 0;
         static object pingNumberLock = new object();
 
