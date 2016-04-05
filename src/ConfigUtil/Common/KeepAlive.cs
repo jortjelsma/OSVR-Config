@@ -32,31 +32,36 @@ namespace ConfigUtil.Common
 
         public static void StartThread()
         {
-            if(thread == null)
-            {
-                thread = new Thread(() =>
-                {
-                    bool finished = false;
-                    while (!finished)
-                    {
-                        int lastPingNumber = -1;
-                        lock (pingNumberLock)
-                        {
-                            lastPingNumber = pingNumber;
-                        }
-                        Thread.Sleep(TimeSpan.FromSeconds(5));
-                        lock (pingNumberLock)
-                        {
-                            if (pingNumber > 0 && lastPingNumber == pingNumber)
-                            {
-                                finished = true;
-                                Environment.FailFast("Not really a failure. Just timed out and CoreCLR doesn't have a nice way to exit gracefully yet.");
-                            }
-                        }
-                    }
-                });
-                thread.Start();
-            }
+            // Disabled temporarily because Environment.FailFast pops up a "Dnx has shut down unexpectedly" dialog.
+            // The latest CoreFx code has an Environment.Exit, which would exit more cleanly, possibly without the dialog,
+            // but that fix isn't in the latest rc1-final version of coreclr. rc2 is coming soon, but until then, we'll
+            // just stay open until they close the console window.
+            //if(thread == null)
+            //{
+            //    thread = new Thread(() =>
+            //    {
+            //        bool finished = false;
+            //        while (!finished)
+            //        {
+            //            int lastPingNumber = -1;
+            //            lock (pingNumberLock)
+            //            {
+            //                lastPingNumber = pingNumber;
+            //            }
+            //            Thread.Sleep(TimeSpan.FromSeconds(5));
+            //            lock (pingNumberLock)
+            //            {
+            //                if (pingNumber > 0 && lastPingNumber == pingNumber)
+            //                {
+            //                    finished = true;
+            //                    Environment.FailFast("Not really a failure. Just timed out and CoreCLR doesn't have a nice way to exit gracefully yet.");
+            //                    Console.WriteLine("OSVR_Config_backend_kill_signal");
+            //                }
+            //            }
+            //        }
+            //    });
+            //    thread.Start();
+            //}
         }
 
         public static void Ping()
