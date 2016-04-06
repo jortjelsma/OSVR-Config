@@ -19,6 +19,7 @@
 /// 
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace OSVRConfig
 {
@@ -33,6 +34,7 @@ namespace OSVRConfig
             startInfo.WorkingDirectory = appRoot;
             startInfo.Arguments = arguments;
             var backendProcess = Process.Start(startInfo);
+            Thread.Sleep(TimeSpan.FromSeconds(2.0));
             var webProcess = Process.Start("http://localhost:5000");
         }
     }
