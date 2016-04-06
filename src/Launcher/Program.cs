@@ -27,9 +27,11 @@ namespace OSVRConfig
         static void Main(string[] args)
         {
             var appRoot = Path.Combine(Environment.CurrentDirectory, "approot");
-            var webCmd = Path.Combine(appRoot, "web.cmd");
+            var webCmd = Path.Combine(appRoot, "runtimes\\dnx-coreclr-win-x64.1.0.0-rc1-update1\\bin\\dnx.exe");
+            var arguments = "--project \"packages\\ConfigUtil\\1.0.0\\root\" --configuration Release web";
             var startInfo = new ProcessStartInfo(webCmd);
             startInfo.WorkingDirectory = appRoot;
+            startInfo.Arguments = arguments;
             var backendProcess = Process.Start(startInfo);
             var webProcess = Process.Start("http://localhost:5000");
         }
