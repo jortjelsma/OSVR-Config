@@ -1,5 +1,13 @@
 ﻿<div class="panel panel-default">
 	<div class="panel-heading">
+		<h3 class="panel-title" data-translate="devices.currentDisplay.title"></h3>
+	</div>
+	<div class="panel-body">
+		<pre>{{vm.configRoot.body.display | json}}</pre>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
 		<h3 class="panel-title" data-translate="devices.panelTitle"></h3>
 	</div>
 	<div class="panel-body">
@@ -18,14 +26,21 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat-start="display in vm.displays">
+				<tr ng-repeat-start="display in vm.displays"
+					ng-class="{'success': vm.isCurrentDisplay(display)}">
 					<td>{{display.fileName}}</td>
 					<td>{{display.body.hmd.device.Note}}</td>
 					<td>{{display.body.hmd.device.model}}</td>
 					<td>{{display.body.hmd.device.vendor}}</td>
 					<td>{{display.body.hmd.device.Version}}</td>
-					<td><button type="button" class="btn btn-primary" ng-click="vm.clickDisplay(display)" data-translate="devices.useDisplay"></button></td>
 					<td><button type="button" class="btn btn-default" ng-click="vm.viewDisplay(display)" data-translate="{{vm.showHideDisplayLabelKey(display)}}"></button></td>
+					<td>
+						<button type="button" class="btn"
+								ng-class="{'btn-primary': !vm.isCurrentDisplay(display), 'btn-success': vm.isCurrentDisplay(display)}"
+								ng-click="vm.clickDisplay(display)" 
+								ng-disabled="vm.isCurrentDisplay(display)"
+								data-translate="{{vm.getUseButtonTextKey(display)}}"></button>
+					</td>
 				</tr>
 				<tr ng-repeat-end="" ng-if="display.showDetail">
 					<td colspan="5">

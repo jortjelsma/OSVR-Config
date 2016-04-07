@@ -47,6 +47,14 @@ module app.devices {
         showHideDisplayLabelKey(display: common.IOSVRDisplay) {
             return display.showDetail ? "devices.hideDisplay" : "devices.showDisplay";
         }
+
+        isCurrentDisplay(display: common.IOSVRDisplay) {
+            return angular.isString(this.configRoot.body.display) && display.relativePath == this.configRoot.body.display;
+        }
+
+        getUseButtonTextKey(display: common.IOSVRDisplay) {
+            return this.isCurrentDisplay(display) ? "devices.isCurrentDisplay" : "devices.useDisplay";
+        }
     }
 
     angular.module("app.devices", ["app.common.ConfigService", "ui.router"])
