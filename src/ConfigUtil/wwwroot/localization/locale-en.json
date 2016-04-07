@@ -28,8 +28,11 @@
     "panelDescription": "Select a display from one of the following available displays to set it as the current display. Some HMDs require additional configuration - see the Samples page to see examples.",
     "overwriteWarning": "Note: This will overwrite the current configuration.",
     "useDisplay": "Use",
-    "viewDisplay": "View",
+    "showDisplay": "Show Display",
+    "hideDisplay": "Hide Display",
     "labels": {
+      "fileName": "File Name",
+      "description": "Description",
       "vendor": "Vendor",
       "model": "Model",
       "Version": "Version",

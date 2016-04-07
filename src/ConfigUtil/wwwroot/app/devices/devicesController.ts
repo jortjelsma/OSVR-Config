@@ -35,11 +35,17 @@ module app.devices {
         }
 
         viewDisplay(display: common.IOSVRDisplay) {
+            var temp = display.showDetail;
             var i = 0;
             for (i = 0; i < this.displays.length; i++) {
                 this.displays[i].showDetail = false;
             }
-            display.showDetail = true;
+
+            display.showDetail = !temp;
+        }
+
+        showHideDisplayLabelKey(display: common.IOSVRDisplay) {
+            return display.showDetail ? "devices.hideDisplay" : "devices.showDisplay";
         }
     }
 
