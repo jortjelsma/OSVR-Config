@@ -45,7 +45,7 @@ module modules {
                 $translateProvider.useSanitizeValueStrategy('escape');
                 $translateProvider.preferredLanguage("en");
 
-                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/
+                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);
             }]);
 
 }

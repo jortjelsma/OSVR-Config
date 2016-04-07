@@ -25,8 +25,10 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li ng-repeat="navItem in vm.navbarItems" ng-class="{active: vm.isActive(navItem)}">
-						<a ui-sref="{{navItem.state}}" data-translate="{{navItem.labelTranslateKey}}"></a>
+					<li ng-repeat="navItem in vm.navbarItems" ng-class="{active: vm.isActive(navItem)}"
+						uib-tooltip="{{navItem.descriptionTranslateKey | translate}}">
+						<a ui-sref="{{navItem.state}}" data-translate="{{navItem.labelTranslateKey}}"
+						   ></a>
 					</li>
 				</ul>
 			</div>

@@ -17,41 +17,16 @@
 /// </copyright>
 /// 
 module app.main {
-    interface INavbarItem {
-        labelTranslateKey: string;
-        state: string;
-    }
 
     class MainController {
-        navbarItems: INavbarItem[] = [
-            {
-                labelTranslateKey: "index.navBarItems.devices",
-                state: "devices"
-            },
-            {
-                labelTranslateKey: "index.navBarItems.renderManager",
-                state: "renderManager"
-            },
-            {
-                labelTranslateKey: "index.navBarItems.plugins",
-                state: "plugins"
-            },
-            {
-                labelTranslateKey: "index.navBarItems.samples",
-                state: "samples"
-            },
-            {
-                labelTranslateKey: "index.navBarItems.tools",
-                state: "tools"
-            }
-        ];
+        navbarItems: app.common.INavbarItem[];
 
         serverRoot: string;
 
         configSaveAsURL: string;
         configSaveAsBlob: Blob;
 
-        isActive(navBarItem: INavbarItem): boolean {
+        isActive(navBarItem: app.common.INavbarItem): boolean {
             return this.$state.current.name == navBarItem.state;
         }
 
@@ -61,8 +36,15 @@ module app.main {
                 this.serverRoot.length > 0;
         }
 
-        static $inject = ["$timeout", "$state", "app.common.ConfigService"];
-        constructor(private $timeout: ng.ITimeoutService, private $state: ng.ui.IStateService, private configService: app.common.IConfigService) {
+        static $inject = ["$timeout", "$state", "app.common.ConfigService", "app.common.NavigationService"];
+        constructor(
+            private $timeout: ng.ITimeoutService,
+            private $state: ng.ui.IStateService,
+            private configService: app.common.IConfigService,
+            private navigationService: app.common.INavigationService) {
+
+            this.navbarItems = navigationService.getNavbarItems();
+
             configService.getCurrentServerRoot().then(serverRoot => {
                 this.serverRoot = serverRoot;
                 if (!this.serverRootDefined()) {
@@ -84,6 +66,6 @@ module app.main {
             $timeout(timeoutFunc, 1000);
         }
     }
-    angular.module("app.main", ["app.common.ConfigService", "ui.router"])
+    angular.module("app.main", ["app.common.ConfigService", "app.common.NavigationService", "ui.router"])
         .controller("app.main.MainController", MainController);
 }

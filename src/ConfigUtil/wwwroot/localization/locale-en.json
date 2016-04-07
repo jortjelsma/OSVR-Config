@@ -2,21 +2,28 @@
   "index": {
     "toggleNavigation": "Toggle navigation",
     "navHome": "OSVR-Config",
-    "currentServerLocation": "Current Config Directory",
+    "currentServerLocation": "Config Directory",
     "navBarItems": {
       "samples": "Samples",
+      "samplesDescription": "A collection of sample configurations you can use as a starting point.",
       "tools": "Tools",
+      "toolsDescription": "A collection of external tools related to OSVR.",
       "devices": "Devices",
+      "devicesDescription": "Select a display configuration.",
       "plugins": "Plugins",
-      "renderManager": "Rendering"
+      "pluginsDescription": "Enable or disable optional plugins.",
+      "renderManager": "Rendering",
+      "renderManagerDescription": "Configure rendering settings and enable or disable direct mode."
     }
   },
   "landingPage": {
     "jumboTron": {
       "title": "OSVR Config",
       "description": "This utility will help you configure OSVR.",
-      "learnMore": "Learn more"
-    }
+      "learnMore": "Learn more",
+      "source": "Source"
+    },
+    "copyright": "OSVR-Config is Copyright 2016 Sensics, Inc."
   },
   "serverRootNotDefined": {
     "panelTitle": "Could not find your OSVR Server directory.",

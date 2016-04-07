@@ -19,13 +19,20 @@
 module app.landingPage {
     class LandingPageController {
         currentConfig: any = {};
-        static $inject = ["$http", "$log", "app.common.ConfigService"];
-        constructor(private $http: ng.IHttpService, private $log: ng.ILogService, private configService: app.common.IConfigService) {
+        navbarItems: app.common.INavbarItem[];
+
+        static $inject = ["$http", "$log", "app.common.ConfigService", "app.common.NavigationService"];
+        constructor(
+            private $http: ng.IHttpService,
+            private $log: ng.ILogService,
+            private configService: app.common.IConfigService,
+            private navigationService: app.common.INavigationService) {
+            this.navbarItems = navigationService.getNavbarItems();
             configService.getCurrent().then(currentConfig => this.currentConfig = currentConfig);
         }
     }
 
-    angular.module("app.landingPage", ["app.common.ConfigService", "ui.router"])
+    angular.module("app.landingPage", ["app.common.ConfigService", "app.common.NavigationService", "ui.router"])
         .config(["$stateProvider", ($stateProvider: angular.ui.IStateProvider) => {
             $stateProvider.state("landingPage", {
                 url: "/",
