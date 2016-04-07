@@ -48,6 +48,9 @@ module app.main {
 
         serverRoot: string;
 
+        configSaveAsURL: string;
+        configSaveAsBlob: Blob;
+
         isActive(navBarItem: INavbarItem): boolean {
             return this.$state.current.name == navBarItem.state;
         }
@@ -65,6 +68,12 @@ module app.main {
                 if (!this.serverRootDefined()) {
                     this.$state.go("serverRootNotDefined");
                 }
+            });
+
+            configService.getCurrent().then(config => {
+                var json = JSON.stringify(config.body, null, 4);
+                this.configSaveAsBlob = new Blob([json], { type: "application/json" });
+                this.configSaveAsURL = URL.createObjectURL(this.configSaveAsBlob);
             });
 
             var timeoutFunc = () => {

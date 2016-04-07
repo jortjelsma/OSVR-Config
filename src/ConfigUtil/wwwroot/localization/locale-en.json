@@ -2,7 +2,7 @@
   "index": {
     "toggleNavigation": "Toggle navigation",
     "navHome": "OSVR-Config",
-    "currentServerLocation": "Current Server Location",
+    "currentServerLocation": "Current Config Directory",
     "navBarItems": {
       "samples": "Samples",
       "tools": "Tools",

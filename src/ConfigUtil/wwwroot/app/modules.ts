@@ -30,11 +30,12 @@ module modules {
             "app.serverRootNotDefined",
             "pascalprecht.translate"
         ])
-        .config(["$stateProvider", "$urlRouterProvider", "$translateProvider",
+        .config(["$stateProvider", "$urlRouterProvider", "$translateProvider", "$compileProvider",
             (
                 $stateProvider: ng.ui.IStateProvider,
                 $urlRouterProvider: ng.ui.IUrlRouterProvider,
-                $translateProvider: ng.translate.ITranslateProvider) => {
+                $translateProvider: ng.translate.ITranslateProvider,
+                $compileProvider: ng.ICompileProvider) => {
 
                 $urlRouterProvider.otherwise("/");
                 $translateProvider.useStaticFilesLoader({
@@ -43,6 +44,8 @@ module modules {
                 });
                 $translateProvider.useSanitizeValueStrategy('escape');
                 $translateProvider.preferredLanguage("en");
+
+                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/
             }]);
 
 }
