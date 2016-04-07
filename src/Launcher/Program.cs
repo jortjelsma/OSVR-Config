@@ -33,19 +33,29 @@ namespace OSVRConfig
         static Process StartBackendProcess()
         {
             var appRoot = Path.Combine(Environment.CurrentDirectory, "approot");
-            var webCmd = Path.Combine(appRoot, "runtimes\\dnx-coreclr-win-x64.1.0.0-rc1-update1\\bin\\dnx.exe");
-            var arguments = "--project \"packages\\ConfigUtil\\1.0.0\\root\" --configuration Release web";
-            var startInfo = new ProcessStartInfo(webCmd);
-            startInfo.WorkingDirectory = appRoot;
-            startInfo.Arguments = arguments;
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = true;
-            return Process.Start(startInfo);
+            var runtimes = Path.Combine(appRoot, "runtimes");
+            foreach(var runtime in Directory.GetDirectories(runtimes))
+            {
+                var webCmd = Path.Combine(runtime, "bin", "dnx.exe");
+                var arguments = "--project \"packages/ConfigUtil/1.0.0/root\" --configuration Release web";
+                var startInfo = new ProcessStartInfo(webCmd);
+                startInfo.WorkingDirectory = appRoot;
+                startInfo.Arguments = arguments;
+                startInfo.UseShellExecute = false;
+                startInfo.RedirectStandardOutput = true;
+                return Process.Start(startInfo);
+            }
+            return null;
         }
 
         static void Main(string[] args)
         {
             var backendProcess = StartBackendProcess();
+            if(backendProcess == null)
+            {
+                Console.WriteLine("Could not find the dnx runtime. This may happen if the OSVR-Config backend did not build successfully.");
+                return;
+            }
             backendProcess.BeginOutputReadLine();
             backendProcess.OutputDataReceived += (sender, e) =>
             {
@@ -58,7 +68,8 @@ namespace OSVRConfig
                     if (e.Data.Contains("OSVR_Config_backend_kill_signal"))
                     {
                         backendProcess.Kill();
-                    } else
+                    }
+                    else
                     {
                         // redirect to launcher's output
                         Console.WriteLine(e.Data);
