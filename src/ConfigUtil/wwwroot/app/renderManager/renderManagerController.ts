@@ -30,11 +30,14 @@ module app.renderManager {
     class RenderManagerController {
         configRoot: app.common.IOSVRConfig;
         config: any;
-        showConfigJson = false;
+        showConfigJson = true;
         showAdvanced = false;
 
-        static $inject = ["$scope", "app.common.ConfigService"];
-        constructor(private $scope: IRenderManagerControllerScope, private configService: app.common.IConfigService) {
+        static $inject = ["$scope", "$http", "app.common.ConfigService"];
+        constructor(
+            private $scope: IRenderManagerControllerScope,
+            private $http: ng.IHttpService,
+            private configService: app.common.IConfigService) {
             configService.getCurrent().then(config => {
                 var rmConfig: any = null;
                 var i = 0;
@@ -67,6 +70,24 @@ module app.renderManager {
                     this.config = this.configRoot.body.renderManagerConfig.renderManagerConfig;
                 }
             });
+        }
+
+        enableDirectMode() {
+            this.$http.post("/api/enableDirectMode", {}).then(
+                response => {
+                    console.log("/api/enableDirectMode call succeeded.");
+                }, reason => {
+                    console.log("/api/enableDirectMode call failed.");
+                });
+        }
+
+        disableDirectMode() {
+            this.$http.post("/api/disableDirectMode", {}).then(
+                response => {
+                    console.log("/api/disableDirectMode call succeeded.");
+                }, reason => {
+                    console.log("/api/disableDirectMode call failed.");
+                });
         }
 
         showHideConfigJsonButtonTextKey() {

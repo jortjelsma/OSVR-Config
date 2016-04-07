@@ -1,5 +1,33 @@
 ﻿<div class="row">
 	<div ng-class="{'col-md-6': vm.showConfigJson, 'col-md-12': !vm.showConfigJson }">
+		<!-- Direct mode -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title" data-translate="renderManager.directMode.title"></h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-12">
+								<p data-translate="renderManager.directMode.description"></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<button type="button" class="btn btn-primary"
+										ng-click="vm.enableDirectMode()"
+										data-translate="renderManager.directMode.enable"></button>
+								<button type="button" class="btn btn-primary"
+										ng-click="vm.disableDirectMode()"
+										data-translate="renderManager.directMode.disable"></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<form name="renderManagerForm" novalidate>
 			<div class="panel panel-default">
 				<div class="panel-heading">

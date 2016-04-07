@@ -20,24 +20,6 @@ module app.tools {
     class ToolsController {
         trackerViewerPath = "";
 
-        enableDirectMode() {
-            this.$http.post("/api/enableDirectMode", {}).then(
-                response => {
-                    console.log("/api/enableDirectMode call succeeded.");
-                }, reason => {
-                    console.log("/api/enableDirectMode call failed.");
-                });
-        }
-
-        disableDirectMode() {
-            this.$http.post("/api/disableDirectMode", {}).then(
-                response => {
-                    console.log("/api/disableDirectMode call succeeded.");
-                }, reason => {
-                    console.log("/api/disableDirectMode call failed.");
-                });
-        }
-
         startTrackerViewer() {
             var paths = (typeof this.trackerViewerPath !== "undefined" && this.trackerViewerPath !== null) ?
                 this.trackerViewerPath.split(" ") : [];
