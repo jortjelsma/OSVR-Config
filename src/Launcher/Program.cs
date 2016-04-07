@@ -25,7 +25,12 @@ namespace OSVRConfig
 {
     class Program
     {
-        static void Main(string[] args)
+        static Process StartFrontendProcess()
+        {
+            return Process.Start("http://localhost:5000");
+        }
+
+        static Process StartBackendProcess()
         {
             var appRoot = Path.Combine(Environment.CurrentDirectory, "approot");
             var webCmd = Path.Combine(appRoot, "runtimes\\dnx-coreclr-win-x64.1.0.0-rc1-update1\\bin\\dnx.exe");
@@ -33,9 +38,36 @@ namespace OSVRConfig
             var startInfo = new ProcessStartInfo(webCmd);
             startInfo.WorkingDirectory = appRoot;
             startInfo.Arguments = arguments;
-            var backendProcess = Process.Start(startInfo);
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+            return Process.Start(startInfo);
+        }
+
+        static void Main(string[] args)
+        {
+            var backendProcess = StartBackendProcess();
+            backendProcess.BeginOutputReadLine();
+            backendProcess.OutputDataReceived += (sender, e) =>
+            {
+                // The backend outputs this to standard output
+                // to signal for us to kill it. We can remove this
+                // once Environment.Exit makes it into the release version
+                // of CoreCLR.
+                if (e.Data != null)
+                {
+                    if (e.Data.Contains("OSVR_Config_backend_kill_signal"))
+                    {
+                        backendProcess.Kill();
+                    } else
+                    {
+                        // redirect to launcher's output
+                        Console.WriteLine(e.Data);
+                    }
+                }
+            };
             Thread.Sleep(TimeSpan.FromSeconds(2.0));
-            var webProcess = Process.Start("http://localhost:5000");
+            var frontendProcess = StartFrontendProcess();
+            backendProcess.WaitForExit();
         }
     }
 }
