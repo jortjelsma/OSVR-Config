@@ -25,8 +25,8 @@ module app.main {
     class MainController {
         navbarItems: INavbarItem[] = [
             {
-                labelTranslateKey: "index.navBarItems.displays",
-                state: "displays"
+                labelTranslateKey: "index.navBarItems.devices",
+                state: "devices"
             },
             {
                 labelTranslateKey: "index.navBarItems.renderManager",

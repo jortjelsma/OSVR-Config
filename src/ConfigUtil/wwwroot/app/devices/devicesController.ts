@@ -16,9 +16,9 @@
 /// limitations under the License.
 /// </copyright>
 ///
-module app.displays {
+module app.devices {
 
-    class DisplaysController {
+    class DevicesController {
         configRoot: app.common.IOSVRConfig;
         config: any;
         displays: common.IOSVRDisplay[];
@@ -43,13 +43,13 @@ module app.displays {
         }
     }
 
-    angular.module("app.displays", ["app.common.ConfigService", "ui.router"])
+    angular.module("app.devices", ["app.common.ConfigService", "ui.router"])
         .config(["$stateProvider", ($stateProvider: angular.ui.IStateProvider) => {
-            $stateProvider.state("displays", {
-                url: "/displays",
-                templateUrl: "app/displays/displays.html",
-                controller: "app.displays.DisplaysController as vm"
+            $stateProvider.state("devices", {
+                url: "/devices",
+                templateUrl: "app/devices/devices.html",
+                controller: "app.devices.DevicesController as vm"
             });
         }])
-        .controller("app.displays.DisplaysController", DisplaysController);
+        .controller("app.devices.DevicesController", DevicesController);
 }

@@ -26,7 +26,7 @@ module modules {
             "app.samples",
             "app.renderManager",
             "app.plugins",
-            "app.displays",
+            "app.devices",
             "app.serverRootNotDefined",
             "pascalprecht.translate"
         ])

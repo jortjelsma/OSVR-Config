@@ -5,7 +5,7 @@
     "navBarItems": {
       "samples": "Samples",
       "tools": "Tools",
-      "displays": "Displays",
+      "devices": "Devices",
       "plugins": "Plugins",
       "renderManager": "Rendering"
     }
@@ -23,7 +23,7 @@
     "downloadOSVRRuntime": "Download OSVR Runtime",
     "downloadOSVRSDK": "Download OSVR SDK"
   },
-  "displays": {
+  "devices": {
     "panelTitle": "Available Displays",
     "panelDescription": "Select a display from one of the following available displays to set it as the current display. Some HMDs require additional configuration - see the Samples page to see examples.",
     "overwriteWarning": "Note: This will overwrite the current configuration.",
