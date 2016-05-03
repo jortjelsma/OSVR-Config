@@ -186,15 +186,15 @@
 						</label>
 
 					</div>
-
-					<div class="checkbox" ng-show="vm.config.timeWarp.enabled">
+					<!-- Temporarily disabled until async-timewarp no longer crashes OSVR-Unreal et. al. -->
+					<!--<div class="checkbox" ng-show="vm.config.timeWarp.enabled">
 						<label>
 							<input type="checkbox"
 								   ng-model="vm.config.timeWarp.asynchronous" />
 							{{'renderManager.labels.timeWarp.asynchronous' | translate}}
 						</label>
 						<p class="help-block" data-translate="renderManager.labels.timeWarp.asynchronousHelp"></p>
-					</div>
+					</div>-->
 
 					<div class="row" ng-show="vm.showAdvanced && vm.config.timeWarp.enabled">
 						<div class="form-group"

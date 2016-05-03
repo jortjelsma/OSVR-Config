@@ -69,7 +69,17 @@ module app.renderManager {
                 } else {
                     this.config = this.configRoot.body.renderManagerConfig.renderManagerConfig;
                 }
+                this.applyTemporaryOverrides();
             });
+        }
+
+        /**
+         * Apply temporary overrides for settings that are not yet shown in the UI.
+         */
+        applyTemporaryOverrides() {
+            // ATW is not officially released and causes a crash in Unreal when enabled.
+            // disable it until this can be fixed.
+            this.config.timeWarp.asynchronous = false;
         }
 
         enableDirectMode() {
