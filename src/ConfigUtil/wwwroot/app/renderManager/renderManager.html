@@ -91,6 +91,18 @@
 						</div>
 					</div>
 					<div class="row">
+						<div class="form-group"
+							 ng-class="vm.inputColumnClassObject()"
+							 ng-show="vm.showAdvanced">
+							<label for="renderOversampleFactor"
+								   data-translate="renderManager.labels.renderOversampleFactor"></label>
+							<input type="number" class="form-control" id="renderOversampleFactor"
+								   step="0.1"
+								   ng-model="vm.config.renderOversampleFactor" />
+							<p class="help-block" data-translate="renderManager.labels.renderOversampleFactorHelp"></p>
+						</div>
+					</div>
+					<div class="row">
 						<div class="form-group" 
 							 ng-class="vm.inputColumnClassObject()"
 							 ng-show="vm.showAdvanced && vm.config.directModeEnabled">
