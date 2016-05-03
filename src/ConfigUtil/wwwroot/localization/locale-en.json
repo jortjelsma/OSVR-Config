@@ -91,7 +91,7 @@
       "numBuffers": "Number of Render Manager Buffers",
       "numBuffersHelp": "Use 1 for front-buffer rendering or 2 for double buffering.",
       "renderOverfillFactor": "Overfill Factor",
-      "renderOverfillFactorHelp": "Specify a value between 1.0 and 2.0. A larger value may increase field of view slightly while moving your head, at the cost of performance.",
+      "renderOverfillFactorHelp": "Specify a value between 1.0 and 2.0 (1.2 or lower recommended on single-GPU systems). A larger value may increase field of view slightly, at the cost of performance.",
       "verticalSyncEnabled": "Vertical Sync Enabled",
       "verticalSyncBlockRenderingEnabled": "Vertical Sync Block Rendering Enabled",
       "verticalSyncBlockRenderingEnabledHelp": "",
