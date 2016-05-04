@@ -80,6 +80,10 @@ module app.renderManager {
             // ATW is not officially released and causes a crash in Unreal when enabled.
             // disable it until this can be fixed.
             this.config.timeWarp.asynchronous = false;
+
+            // renderOversampleFactor seems to cause issues in Unreal.
+            // disabling for now.
+            this.config.renderOversampleFactor = 1.0;
         }
 
         enableDirectMode() {
