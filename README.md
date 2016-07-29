@@ -53,3 +53,12 @@ If you'd like to help with development, and not just build the project:
  * Once you've published the application with `dnu`, you should have a `web.cmd` (for Windows) and/or a `web` shell script (for Mac/Linux) located in the `artifacts/approot` directory within this repository's root directory. Run this to start the backend.
  * Once the backend is running, go to [http://localhost:5000](http://localhost:5000) in a browser to start the application.
  * There is a github issue to make this a one-click process. See https://github.com/OSVR/OSVR-Config/issues/9.
+ * 
+ 
+#Branding
+
+At present, this utility is branded "OSVR by Sensics". If custom versions are desired, feel free to change the branding 
+
+#Help wanted
+
+The creation of this utility focused on functionality, not GUI. Suggestions or improvements to the look and feel are very much welcome.
