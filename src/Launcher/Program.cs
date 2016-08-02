@@ -32,20 +32,15 @@ namespace OSVRConfig
 
         static Process StartBackendProcess()
         {
-            var appRoot = Path.Combine(Environment.CurrentDirectory, "approot");
-            var runtimes = Path.Combine(appRoot, "runtimes");
-            foreach(var runtime in Directory.GetDirectories(runtimes))
-            {
-                var webCmd = Path.Combine(runtime, "bin", "dnx.exe");
-                var arguments = "--project \"packages/ConfigUtil/1.0.0/root\" --configuration Release web";
-                var startInfo = new ProcessStartInfo(webCmd);
-                startInfo.WorkingDirectory = appRoot;
-                startInfo.Arguments = arguments;
-                startInfo.UseShellExecute = false;
-                startInfo.RedirectStandardOutput = true;
-                return Process.Start(startInfo);
-            }
-            return null;
+            var appRoot = Path.Combine(Environment.CurrentDirectory, "bin");
+            var webCmd = Path.Combine(appRoot, "ConfigUtil.exe");
+            var arguments = "";
+            var startInfo = new ProcessStartInfo(webCmd);
+            startInfo.WorkingDirectory = appRoot;
+            startInfo.Arguments = arguments;
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+            return Process.Start(startInfo);
         }
 
         static void Main(string[] args)
@@ -53,7 +48,7 @@ namespace OSVRConfig
             var backendProcess = StartBackendProcess();
             if(backendProcess == null)
             {
-                Console.WriteLine("Could not find the dnx runtime. This may happen if the OSVR-Config backend did not build successfully.");
+                Console.WriteLine("Could not find the ConfigUtil web backend application. Maybe it didn't build successfully?");
                 return;
             }
             backendProcess.BeginOutputReadLine();
@@ -76,7 +71,7 @@ namespace OSVRConfig
                     }
                 }
             };
-            Thread.Sleep(TimeSpan.FromSeconds(2.0));
+            Thread.Sleep(TimeSpan.FromSeconds(4.0));
             var frontendProcess = StartFrontendProcess();
             backendProcess.WaitForExit();
         }

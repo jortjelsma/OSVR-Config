@@ -40,6 +40,10 @@ namespace ConfigUtil.Models
             using (var jr = new JsonTextReader(configReader))
             {
                 JToken token = JObject.ReadFrom(jr);
+                if(!(token is JObject))
+                {
+                    return null;
+                }
                 ret.Body = (JObject)token;
 
                 // Display

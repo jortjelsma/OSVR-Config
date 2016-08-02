@@ -16,26 +16,28 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using ConfigUtil.Common;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
 
-namespace ConfigUtil.Controllers
+namespace ConfigUtil
 {
-    [Route("api/[controller]")]
-    public class ServerRootController : Controller
+    public class Program
     {
-        private readonly IConfiguration config;
-        public ServerRootController(IConfiguration config)
+        public static void Main(string[] args)
         {
-            this.config = config;
-        }
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .Build();
 
-        // GET: api/serverroot
-        [HttpGet]
-        public string Get()
-        {
-            return this.config.GetOSVRServerDirectory();
+            host.Run();
         }
     }
 }

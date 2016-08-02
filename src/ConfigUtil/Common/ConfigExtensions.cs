@@ -25,7 +25,7 @@ namespace ConfigUtil.Common
     {
         public static string GetOSVRServerDirectory(this IConfiguration config)
         {
-            var envValue = config.Get<string>("OSVR_SERVER_ROOT", null);
+            var envValue = config.GetValue<string>("OSVR_SERVER_ROOT", null);
             return OSVRServer.ParseServerPath(envValue);
         }
     }
