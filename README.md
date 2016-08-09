@@ -1,6 +1,9 @@
 # OSVR-Config
 OSVR-Config is a utility to configure the OSVR Server, and gives you access to a few OSVR-related tools.
 
+# Tutorial video
+Short video showing how to use the utility is [here](https://t.co/LdeefQgAAK).
+
 # Pre-built Binaries
 Download the latest OSVR-Config build [here](http://access.osvr.com/binary/osvr_config).
 
