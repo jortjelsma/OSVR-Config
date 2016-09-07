@@ -32,13 +32,29 @@ namespace ConfigUtil.Models
         {
             var displaysPath = System.IO.Path.Combine(serverPath, "sample-configs");
 
-            return from displayFile in System.IO.Directory.EnumerateFiles(displaysPath)
-                   where displayFile.Contains("osvr_server_config")
-                   select new ServerConfigSample()
-                   {
-                       FileName = System.IO.Path.GetFileName(displayFile),
-                       Body = OSVRConfig.Read(displayFile, serverPath),
-                   };
+            var displayFiles =
+                from displayFile in System.IO.Directory.EnumerateFiles(displaysPath)
+                where displayFile.Contains("osvr_server_config")
+                select new ServerConfigSample()
+                {
+                    FileName = System.IO.Path.GetFileName(displayFile),
+                    Body = OSVRConfig.Read(displayFile, serverPath),
+                };
+
+            // These will be filtered out for the client, but log something
+            // to let us know of badly formed sample configs.
+            foreach(var errorDisplayFile in
+                from displayFile in displayFiles
+                where displayFile.Body == null && displayFile.FileName != null
+                select displayFile)
+            {
+                Console.WriteLine("Could not parse sample {0}", errorDisplayFile.FileName);
+            }
+
+            // filter the sample configs to only those that parse correctly.
+            return from displayFile in displayFiles
+                   where displayFile.Body != null && displayFile.FileName != null
+                   select displayFile;
         }
     }
 }

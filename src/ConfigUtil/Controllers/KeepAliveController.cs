@@ -16,7 +16,7 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using ConfigUtil.Common;
 
 namespace ConfigUtil.Controllers
