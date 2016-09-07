@@ -56,23 +56,9 @@ namespace ConfigUtil
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseBrowserLink();
-            //    app.UseDeveloperExceptionPage();
-            //}
-            //else
-            //{
-            //    app.UseExceptionHandler("/Home/Error");
-            //}
-
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc();
         }
-
-        // Entry point for the application.
-        //public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }
