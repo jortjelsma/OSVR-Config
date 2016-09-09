@@ -17,6 +17,7 @@
 /// </copyright>
 /// 
 using System.Diagnostics;
+using ConfigUtil.Common;
 
 namespace ConfigUtil.Models
 {
@@ -24,17 +25,23 @@ namespace ConfigUtil.Models
     {
         public static void Disable(string serverPath)
         {
-            var disableDirectModePath = System.IO.Path.Combine(serverPath, "DisableOSVRDirectMode.exe");
-            var disableDirectModePathAMD = System.IO.Path.Combine(serverPath, "DisableOSVRDirectModeAMD.exe");
+            var disableDirectModeFileName = OSExeUtil.PlatformSpecificExeName("DisableOSVRDirectMode");
+            var disableDirectModePath = System.IO.Path.Combine(serverPath, disableDirectModeFileName);
             Process.Start(disableDirectModePath);
+
+            var disableDirectModeAMDFileName = OSExeUtil.PlatformSpecificExeName("DisableOSVRDirectModeAMD");
+            var disableDirectModePathAMD = System.IO.Path.Combine(serverPath, disableDirectModeAMDFileName);
             Process.Start(disableDirectModePathAMD);
         }
 
         public static void Enable(string serverPath)
         {
-            var enableDirectModePath = System.IO.Path.Combine(serverPath, "EnableOSVRDirectMode.exe");
-            var enableDirectModePathAMD = System.IO.Path.Combine(serverPath, "EnableOSVRDirectModeAMD.exe");
+            var enableDirectModeFileName = OSExeUtil.PlatformSpecificExeName("EnableOSVRDirectMode");
+            var enableDirectModePath = System.IO.Path.Combine(serverPath, enableDirectModeFileName);
             Process.Start(enableDirectModePath);
+
+            var enableDirectModeAMDFileName = OSExeUtil.PlatformSpecificExeName("EnableOSVRDirectModeAMD");
+            var enableDirectModePathAMD = System.IO.Path.Combine(serverPath, enableDirectModeAMDFileName);
             Process.Start(enableDirectModePathAMD);
         }
     }

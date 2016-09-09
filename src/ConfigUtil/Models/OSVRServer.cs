@@ -19,6 +19,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using ConfigUtil.Common;
 
 namespace ConfigUtil.Models
 {
@@ -26,7 +27,8 @@ namespace ConfigUtil.Models
     {
         public static void Start(string serverPath)
         {
-            var osvrServerExe = Path.Combine(serverPath, "osvr_server.exe");
+            var osvrServerExeFileName = OSExeUtil.PlatformSpecificExeName("osvr_server");
+            var osvrServerExe = Path.Combine(serverPath, osvrServerExeFileName);
             var startInfo = new ProcessStartInfo();
             startInfo.FileName = osvrServerExe;
             startInfo.WorkingDirectory = serverPath;
