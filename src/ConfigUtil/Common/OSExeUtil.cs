@@ -16,20 +16,20 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using ConfigUtil.Common;
+using System.Runtime.InteropServices;
+using System.IO;
 
-namespace ConfigUtil.Models
+namespace ConfigUtil.Common
 {
-    public static class TrackerViewer
+    public static class OSExeUtil
     {
-        public static void Start(IEnumerable<string> paths, string serverPath)
+        public static string PlatformSpecificExeName(string normalizedName)
         {
-            var trackerViewerExeName = OSExeUtil.PlatformSpecificExeName("OSVRTrackerView");
-            var trackerViewerPath = System.IO.Path.Combine(serverPath, trackerViewerExeName);
-            Process.Start(trackerViewerPath, String.Join(" ", paths));
+            if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return Path.ChangeExtension(normalizedName, "exe");
+            }
+            return normalizedName;
         }
     }
 }
