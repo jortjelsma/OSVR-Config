@@ -16,30 +16,26 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using OSVR.Config.Models;
 using Microsoft.Extensions.Configuration;
 using OSVR.Config.Common;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class SampleConfigsController : Controller
+    public class ServerRootController : Controller
     {
         private readonly IConfiguration config;
-
-        public SampleConfigsController(IConfiguration config)
+        public ServerRootController(IConfiguration config)
         {
             this.config = config;
         }
 
-        // GET: api/sampleconfigs
+        // GET: api/serverroot
         [HttpGet]
-        public IEnumerable<ServerConfigSample> Get()
+        public string Get()
         {
-            var serverPath = this.config.GetOSVRServerDirectory();
-            return ServerConfigSample.GetAvailableSamples(serverPath);
+            return this.config.GetOSVRServerDirectory();
         }
     }
 }

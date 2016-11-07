@@ -17,27 +17,18 @@
 /// </copyright>
 /// 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using OSVR.Config.Common;
-using OSVR.Config.Models;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class StartServerController : Controller
+    public class KeepAliveController : Controller
     {
-        private readonly IConfiguration config;
-        public StartServerController(IConfiguration config)
-        {
-            this.config = config;
-        }
-
-        // POST api/startserver
+        // POST api/keepalive
         [HttpPost]
         public void Post()
         {
-            var serverPath = this.config.GetOSVRServerDirectory();
-            OSVRServer.Start(serverPath);
+            KeepAlive.Ping();
         }
     }
 }

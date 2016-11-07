@@ -19,23 +19,26 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using OSVR.Config.Common;
+using OSVR.Config.Models;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class ServerRootController : Controller
+    public class DisableDirectModeController : Controller
     {
         private readonly IConfiguration config;
-        public ServerRootController(IConfiguration config)
+
+        public DisableDirectModeController(IConfiguration config)
         {
             this.config = config;
         }
 
-        // GET: api/serverroot
-        [HttpGet]
-        public string Get()
+        // POST api/values
+        [HttpPost]
+        public void Post()
         {
-            return this.config.GetOSVRServerDirectory();
+            var serverPath = this.config.GetOSVRServerDirectory();
+            DirectMode.Disable(serverPath);
         }
     }
 }

@@ -16,19 +16,30 @@
 /// limitations under the License.
 /// </copyright>
 /// 
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using OSVR.Config.Common;
+using OSVR.Config.Models;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class KeepAliveController : Controller
+    public class StartTrackerViewerController : Controller
     {
-        // POST api/keepalive
-        [HttpPost]
-        public void Post()
+        private readonly IConfiguration config;
+
+        public StartTrackerViewerController(IConfiguration config)
         {
-            KeepAlive.Ping();
+            this.config = config;
+        }
+
+        // POST api/starttrackerviewer[?paths=path1,path2,...]
+        [HttpPost]
+        public void Post([FromQuery]IEnumerable<string> paths)
+        {
+            var serverPath = this.config.GetOSVRServerDirectory();
+            TrackerViewer.Start(paths, serverPath);
         }
     }
 }

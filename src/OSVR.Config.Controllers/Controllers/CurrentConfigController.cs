@@ -27,7 +27,7 @@ using System.IO;
 using OSVR.Config.Common;
 using Newtonsoft.Json;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
     public class CurrentConfigController : Controller

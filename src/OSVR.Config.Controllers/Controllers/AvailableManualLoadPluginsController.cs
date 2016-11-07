@@ -26,7 +26,7 @@ using Microsoft.Extensions.Configuration;
 using OSVR.Config.Common;
 using System.IO;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
     public class AvailableManualLoadPluginsController : Controller

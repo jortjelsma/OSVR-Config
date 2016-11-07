@@ -21,24 +21,23 @@ using Microsoft.Extensions.Configuration;
 using OSVR.Config.Common;
 using OSVR.Config.Models;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class DisableDirectModeController : Controller
+    public class StartServerController : Controller
     {
         private readonly IConfiguration config;
-
-        public DisableDirectModeController(IConfiguration config)
+        public StartServerController(IConfiguration config)
         {
             this.config = config;
         }
 
-        // POST api/values
+        // POST api/startserver
         [HttpPost]
         public void Post()
         {
             var serverPath = this.config.GetOSVRServerDirectory();
-            DirectMode.Disable(serverPath);
+            OSVRServer.Start(serverPath);
         }
     }
 }

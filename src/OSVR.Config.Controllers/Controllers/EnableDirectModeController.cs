@@ -16,30 +16,29 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using OSVR.Config.Common;
 using OSVR.Config.Models;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class StartTrackerViewerController : Controller
+    public class EnableDirectModeController : Controller
     {
         private readonly IConfiguration config;
 
-        public StartTrackerViewerController(IConfiguration config)
+        public EnableDirectModeController(IConfiguration config)
         {
             this.config = config;
         }
 
-        // POST api/starttrackerviewer[?paths=path1,path2,...]
+        // POST api/values
         [HttpPost]
-        public void Post([FromQuery]IEnumerable<string> paths)
+        public void Post()
         {
             var serverPath = this.config.GetOSVRServerDirectory();
-            TrackerViewer.Start(paths, serverPath);
+            DirectMode.Enable(serverPath);
         }
     }
 }

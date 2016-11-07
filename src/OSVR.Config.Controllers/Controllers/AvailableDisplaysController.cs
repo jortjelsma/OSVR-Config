@@ -26,7 +26,7 @@ using Microsoft.Extensions.Configuration;
 using OSVR.Config.Models;
 using OSVR.Config.Common;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
     public class AvailableDisplaysController : Controller
