@@ -19,7 +19,7 @@
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace ConfigUtil.Common
+namespace OSVR.Config.Common
 {
     public static class OSExeUtil
     {

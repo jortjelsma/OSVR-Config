@@ -23,8 +23,8 @@ using System.Threading.Tasks;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using ConfigUtil.Models;
-using ConfigUtil.Common;
+using OSVR.Config.Models;
+using OSVR.Config.Common;
 
 namespace ConfigUtil.Controllers
 {

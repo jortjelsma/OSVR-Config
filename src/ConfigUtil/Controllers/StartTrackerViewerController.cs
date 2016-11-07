@@ -19,8 +19,8 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using ConfigUtil.Common;
-using ConfigUtil.Models;
+using OSVR.Config.Common;
+using OSVR.Config.Models;
 
 namespace ConfigUtil.Controllers
 {

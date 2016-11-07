@@ -21,9 +21,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ConfigUtil.Models;
+using OSVR.Config.Models;
 using Microsoft.Extensions.Configuration;
-using ConfigUtil.Common;
+using OSVR.Config.Common;
 using System.IO;
 
 namespace ConfigUtil.Controllers

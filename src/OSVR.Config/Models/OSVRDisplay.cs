@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace ConfigUtil.Models
+namespace OSVR.Config.Models
 {
     public class OSVRDisplay
     {

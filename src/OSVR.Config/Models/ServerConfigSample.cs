@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ConfigUtil.Models
+namespace OSVR.Config.Models
 {
     public class ServerConfigSample
     {

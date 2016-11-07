@@ -17,7 +17,7 @@
 /// </copyright>
 /// 
 using Microsoft.AspNetCore.Mvc;
-using ConfigUtil.Common;
+using OSVR.Config.Common;
 
 namespace ConfigUtil.Controllers
 {

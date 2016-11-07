@@ -16,17 +16,20 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using Microsoft.Extensions.Configuration;
-using ConfigUtil.Models;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using OSVR.Config.Common;
 
-namespace ConfigUtil.Common
+namespace OSVR.Config.Models
 {
-    public static class ConfigExtensions
+    public static class TrackerViewer
     {
-        public static string GetOSVRServerDirectory(this IConfiguration config)
+        public static void Start(IEnumerable<string> paths, string serverPath)
         {
-            var envValue = config.GetValue<string>("OSVR_SERVER_ROOT", null);
-            return OSVRServer.ParseServerPath(envValue);
+            var trackerViewerExeName = OSExeUtil.PlatformSpecificExeName("OSVRTrackerView");
+            var trackerViewerPath = System.IO.Path.Combine(serverPath, trackerViewerExeName);
+            Process.Start(trackerViewerPath, String.Join(" ", paths));
         }
     }
 }
