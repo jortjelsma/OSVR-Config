@@ -20,7 +20,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
 
-namespace ConfigUtil.Models
+namespace OSVR.Config.Models
 {
     public class OSVRInclude
     {

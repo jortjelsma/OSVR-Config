@@ -16,17 +16,30 @@
 /// limitations under the License.
 /// </copyright>
 /// 
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using ConfigUtil.Models;
+using OSVR.Config.Common;
+using OSVR.Config.Models;
 
-namespace ConfigUtil.Common
+namespace OSVR.Config.Controllers
 {
-    public static class ConfigExtensions
+    [Route("api/[controller]")]
+    public class StartTrackerViewerController : Controller
     {
-        public static string GetOSVRServerDirectory(this IConfiguration config)
+        private readonly IConfiguration config;
+
+        public StartTrackerViewerController(IConfiguration config)
         {
-            var envValue = config.GetValue<string>("OSVR_SERVER_ROOT", null);
-            return OSVRServer.ParseServerPath(envValue);
+            this.config = config;
+        }
+
+        // POST api/starttrackerviewer[?paths=path1,path2,...]
+        [HttpPost]
+        public void Post([FromQuery]IEnumerable<string> paths)
+        {
+            var serverPath = this.config.GetOSVRServerDirectory();
+            TrackerViewer.Start(paths, serverPath);
         }
     }
 }

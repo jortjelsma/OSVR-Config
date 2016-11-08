@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ConfigUtil.Models
+namespace OSVR.Config.Models
 {
     public class ManualLoadPlugin
     {

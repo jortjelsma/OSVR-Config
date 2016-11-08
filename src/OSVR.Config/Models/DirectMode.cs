@@ -17,9 +17,9 @@
 /// </copyright>
 /// 
 using System.Diagnostics;
-using ConfigUtil.Common;
+using OSVR.Config.Common;
 
-namespace ConfigUtil.Models
+namespace OSVR.Config.Models
 {
     public static class DirectMode
     {

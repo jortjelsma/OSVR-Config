@@ -16,28 +16,43 @@
 /// limitations under the License.
 /// </copyright>
 /// 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OSVR.Config.Models;
 using Microsoft.Extensions.Configuration;
-using ConfigUtil.Common;
-using ConfigUtil.Models;
+using System.IO;
+using OSVR.Config.Common;
+using Newtonsoft.Json;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class StartServerController : Controller
+    public class CurrentConfigController : Controller
     {
         private readonly IConfiguration config;
-        public StartServerController(IConfiguration config)
+
+        public CurrentConfigController(IConfiguration config)
         {
             this.config = config;
         }
 
-        // POST api/startserver
-        [HttpPost]
-        public void Post()
+        // GET: api/currentconfig
+        [HttpGet]
+        public OSVRConfig Get()
         {
-            var serverPath = this.config.GetOSVRServerDirectory();
-            OSVRServer.Start(serverPath);
+            var serverPath = config.GetOSVRServerDirectory();
+            return OSVRConfig.GetCurrent(config, serverPath);
+        }
+
+        // POST api/currentconfig
+        [HttpPost]
+        public void Post([FromBody]OSVRConfig value)
+        {
+            var serverPath = config.GetOSVRServerDirectory();
+            OSVRConfig.SetCurrent(value, serverPath);
         }
     }
 }

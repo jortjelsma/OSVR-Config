@@ -22,7 +22,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ConfigUtil.Common
+namespace OSVR.Config.Common
 {
     public static class KeepAlive
     {

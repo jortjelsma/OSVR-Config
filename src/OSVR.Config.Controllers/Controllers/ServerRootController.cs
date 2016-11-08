@@ -16,33 +16,26 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ConfigUtil.Models;
 using Microsoft.Extensions.Configuration;
-using ConfigUtil.Common;
-using System.IO;
+using OSVR.Config.Common;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class AvailableManualLoadPluginsController : Controller
+    public class ServerRootController : Controller
     {
         private readonly IConfiguration config;
-        public AvailableManualLoadPluginsController(IConfiguration config)
+        public ServerRootController(IConfiguration config)
         {
             this.config = config;
         }
 
-        // GET: api/availablemanualloadplugins
+        // GET: api/serverroot
         [HttpGet]
-        public IEnumerable<ManualLoadPlugin> Get()
+        public string Get()
         {
-            var serverPath = this.config.GetOSVRServerDirectory();
-            return ManualLoadPlugin.GetAvailablePlugins(serverPath);
+            return this.config.GetOSVRServerDirectory();
         }
     }
 }

@@ -21,38 +21,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ConfigUtil.Models;
+using OSVR.Config.Models;
 using Microsoft.Extensions.Configuration;
+using OSVR.Config.Common;
 using System.IO;
-using ConfigUtil.Common;
-using Newtonsoft.Json;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class CurrentConfigController : Controller
+    public class AvailableManualLoadPluginsController : Controller
     {
         private readonly IConfiguration config;
-
-        public CurrentConfigController(IConfiguration config)
+        public AvailableManualLoadPluginsController(IConfiguration config)
         {
             this.config = config;
         }
 
-        // GET: api/currentconfig
+        // GET: api/availablemanualloadplugins
         [HttpGet]
-        public OSVRConfig Get()
+        public IEnumerable<ManualLoadPlugin> Get()
         {
-            var serverPath = config.GetOSVRServerDirectory();
-            return OSVRConfig.GetCurrent(config, serverPath);
-        }
-
-        // POST api/currentconfig
-        [HttpPost]
-        public void Post([FromBody]OSVRConfig value)
-        {
-            var serverPath = config.GetOSVRServerDirectory();
-            OSVRConfig.SetCurrent(value, serverPath);
+            var serverPath = this.config.GetOSVRServerDirectory();
+            return ManualLoadPlugin.GetAvailablePlugins(serverPath);
         }
     }
 }

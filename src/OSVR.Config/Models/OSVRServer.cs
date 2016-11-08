@@ -19,9 +19,9 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using ConfigUtil.Common;
+using OSVR.Config.Common;
 
-namespace ConfigUtil.Models
+namespace OSVR.Config.Models
 {
     public static class OSVRServer
     {

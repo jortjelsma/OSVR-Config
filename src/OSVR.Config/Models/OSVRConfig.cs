@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace ConfigUtil.Models
+namespace OSVR.Config.Models
 {
     public class OSVRConfig
     {

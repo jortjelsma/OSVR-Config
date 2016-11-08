@@ -16,29 +16,17 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using ConfigUtil.Common;
-using ConfigUtil.Models;
+using OSVR.Config.Models;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Common
 {
-    [Route("api/[controller]")]
-    public class EnableDirectModeController : Controller
+    public static class ConfigExtensions
     {
-        private readonly IConfiguration config;
-
-        public EnableDirectModeController(IConfiguration config)
+        public static string GetOSVRServerDirectory(this IConfiguration config)
         {
-            this.config = config;
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post()
-        {
-            var serverPath = this.config.GetOSVRServerDirectory();
-            DirectMode.Enable(serverPath);
+            var envValue = config.GetValue<string>("OSVR_SERVER_ROOT", null);
+            return OSVRServer.ParseServerPath(envValue);
         }
     }
 }

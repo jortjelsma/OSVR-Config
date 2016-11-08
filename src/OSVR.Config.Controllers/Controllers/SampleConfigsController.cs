@@ -16,33 +16,30 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.IO;
 using Microsoft.AspNetCore.Mvc;
+using OSVR.Config.Models;
 using Microsoft.Extensions.Configuration;
-using ConfigUtil.Models;
-using ConfigUtil.Common;
+using OSVR.Config.Common;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class AvailableDisplaysController : Controller
+    public class SampleConfigsController : Controller
     {
         private readonly IConfiguration config;
-        public AvailableDisplaysController(IConfiguration config)
+
+        public SampleConfigsController(IConfiguration config)
         {
             this.config = config;
         }
 
-        // GET: api/availabledisplays
+        // GET: api/sampleconfigs
         [HttpGet]
-        public IEnumerable<OSVRDisplay> Get()
+        public IEnumerable<ServerConfigSample> Get()
         {
-            string serverPath = this.config.GetOSVRServerDirectory();
-            return OSVRDisplay.GetAvailableDisplays(serverPath);
+            var serverPath = this.config.GetOSVRServerDirectory();
+            return ServerConfigSample.GetAvailableSamples(serverPath);
         }
     }
 }

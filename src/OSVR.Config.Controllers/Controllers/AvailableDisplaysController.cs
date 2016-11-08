@@ -16,19 +16,33 @@
 /// limitations under the License.
 /// </copyright>
 /// 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.IO;
 using Microsoft.AspNetCore.Mvc;
-using ConfigUtil.Common;
+using Microsoft.Extensions.Configuration;
+using OSVR.Config.Models;
+using OSVR.Config.Common;
 
-namespace ConfigUtil.Controllers
+namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class KeepAliveController : Controller
+    public class AvailableDisplaysController : Controller
     {
-        // POST api/keepalive
-        [HttpPost]
-        public void Post()
+        private readonly IConfiguration config;
+        public AvailableDisplaysController(IConfiguration config)
         {
-            KeepAlive.Ping();
+            this.config = config;
+        }
+
+        // GET: api/availabledisplays
+        [HttpGet]
+        public IEnumerable<OSVRDisplay> Get()
+        {
+            string serverPath = this.config.GetOSVRServerDirectory();
+            return OSVRDisplay.GetAvailableDisplays(serverPath);
         }
     }
 }

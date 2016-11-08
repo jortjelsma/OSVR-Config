@@ -23,7 +23,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
-using ConfigUtil.Common;
+using OSVR.Config.Common;
 using System.Net;
 
 namespace ConfigUtil
