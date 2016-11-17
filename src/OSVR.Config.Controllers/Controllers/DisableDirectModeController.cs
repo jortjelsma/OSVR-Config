@@ -35,10 +35,10 @@ namespace OSVR.Config.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post()
+        public void Post(string threeLetterVendorPNPID = null)
         {
             var serverPath = this.config.GetOSVRServerDirectory();
-            DirectMode.Disable(serverPath);
+            DirectMode.Disable(serverPath, threeLetterVendorPNPID);
         }
     }
 }
