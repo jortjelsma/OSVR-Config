@@ -23,26 +23,28 @@ namespace OSVR.Config.Models
 {
     public static class DirectMode
     {
-        public static void Disable(string serverPath)
+        private static string GetArguments(string threeLetterVendorPNPID)
+        {
+            string ret = "--no-wait";
+            if(!string.IsNullOrWhiteSpace(threeLetterVendorPNPID))
+            {
+                ret = $"{ret} {threeLetterVendorPNPID}";
+            }
+            return ret;
+        }
+
+        public static void Disable(string serverPath, string threeLetterVendorPNPID = null)
         {
             var disableDirectModeFileName = OSExeUtil.PlatformSpecificExeName("DisableOSVRDirectMode");
             var disableDirectModePath = System.IO.Path.Combine(serverPath, disableDirectModeFileName);
-            Process.Start(disableDirectModePath);
-
-            var disableDirectModeAMDFileName = OSExeUtil.PlatformSpecificExeName("DisableOSVRDirectModeAMD");
-            var disableDirectModePathAMD = System.IO.Path.Combine(serverPath, disableDirectModeAMDFileName);
-            Process.Start(disableDirectModePathAMD);
+            Process.Start(disableDirectModePath, GetArguments(threeLetterVendorPNPID));
         }
 
-        public static void Enable(string serverPath)
+        public static void Enable(string serverPath, string threeLetterVendorPNPID = null)
         {
             var enableDirectModeFileName = OSExeUtil.PlatformSpecificExeName("EnableOSVRDirectMode");
             var enableDirectModePath = System.IO.Path.Combine(serverPath, enableDirectModeFileName);
-            Process.Start(enableDirectModePath);
-
-            var enableDirectModeAMDFileName = OSExeUtil.PlatformSpecificExeName("EnableOSVRDirectModeAMD");
-            var enableDirectModePathAMD = System.IO.Path.Combine(serverPath, enableDirectModeAMDFileName);
-            Process.Start(enableDirectModePathAMD);
+            Process.Start(enableDirectModePath, GetArguments(threeLetterVendorPNPID));
         }
     }
 }
