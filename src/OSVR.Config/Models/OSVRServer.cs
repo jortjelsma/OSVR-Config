@@ -16,6 +16,7 @@
 /// limitations under the License.
 /// </copyright>
 /// 
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -35,6 +36,21 @@ namespace OSVR.Config.Models
             Process.Start(startInfo);
         }
 
+        public static void Stop()
+        {
+            var servers = Process.GetProcessesByName("osvr_server");
+            foreach(var server in servers)
+            {
+                server.Kill();
+            }
+        }
+
+        public static void Restart(string serverPath)
+        {
+            Stop();
+            Start(serverPath);
+        }
+
         public static string ParseServerPath(string environmentValue)
         {
             if (environmentValue != null && environmentValue.Contains(';'))
@@ -43,6 +59,17 @@ namespace OSVR.Config.Models
                 return values.Last();
             }
             return environmentValue ?? "";
+        }
+
+        public static string[] RunningServerPaths()
+        {
+            var servers = Process.GetProcessesByName("osvr_server");
+            var ret = new List<string>();
+            foreach(var server in servers)
+            {
+                ret.Add(server.MainModule.FileName);
+            }
+            return ret.ToArray();
         }
     }
 }
