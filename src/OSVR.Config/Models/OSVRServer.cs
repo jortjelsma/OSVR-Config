@@ -30,10 +30,7 @@ namespace OSVR.Config.Models
         {
             var osvrServerExeFileName = OSExeUtil.PlatformSpecificExeName("osvr_server");
             var osvrServerExe = Path.Combine(serverPath, osvrServerExeFileName);
-            var startInfo = new ProcessStartInfo();
-            startInfo.FileName = osvrServerExe;
-            startInfo.WorkingDirectory = serverPath;
-            Process.Start(startInfo);
+            OSExeUtil.RunProcessInOwnConsole(osvrServerExe, serverPath);
         }
 
         public static void Stop()

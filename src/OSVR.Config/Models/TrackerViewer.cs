@@ -17,6 +17,7 @@
 /// </copyright>
 /// 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using OSVR.Config.Common;
@@ -25,11 +26,22 @@ namespace OSVR.Config.Models
 {
     public static class TrackerViewer
     {
+        private static IEnumerable<string> GetAllPaths(IEnumerable<string> paths)
+        {
+            foreach(var pathWithCommas in paths)
+            {
+                foreach(var truePath in pathWithCommas.Split(','))
+                {
+                    yield return truePath;
+                }
+            }
+        }
+
         public static void Start(IEnumerable<string> paths, string serverPath)
         {
             var trackerViewerExeName = OSExeUtil.PlatformSpecificExeName("OSVRTrackerView");
             var trackerViewerPath = System.IO.Path.Combine(serverPath, trackerViewerExeName);
-            Process.Start(trackerViewerPath, String.Join(" ", paths));
+            OSExeUtil.RunProcessInOwnConsole(trackerViewerPath, serverPath, GetAllPaths(paths).ToArray());
         }
     }
 }

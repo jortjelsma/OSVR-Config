@@ -23,12 +23,12 @@ namespace OSVR.Config.Models
 {
     public static class DirectMode
     {
-        private static string GetArguments(string threeLetterVendorPNPID)
+        private static string[] GetArguments(string threeLetterVendorPNPID)
         {
-            string ret = "--no-wait";
+            var ret = new string[] { "--no-wait" };
             if(!string.IsNullOrWhiteSpace(threeLetterVendorPNPID))
             {
-                ret = $"{ret} {threeLetterVendorPNPID}";
+                ret = new string[] { ret[0], threeLetterVendorPNPID };
             }
             return ret;
         }
@@ -37,14 +37,14 @@ namespace OSVR.Config.Models
         {
             var disableDirectModeFileName = OSExeUtil.PlatformSpecificExeName("DisableOSVRDirectMode");
             var disableDirectModePath = System.IO.Path.Combine(serverPath, disableDirectModeFileName);
-            Process.Start(disableDirectModePath, GetArguments(threeLetterVendorPNPID));
+            OSExeUtil.RunProcessInOwnConsole(disableDirectModePath, serverPath, GetArguments(threeLetterVendorPNPID));
         }
 
         public static void Enable(string serverPath, string threeLetterVendorPNPID = null)
         {
             var enableDirectModeFileName = OSExeUtil.PlatformSpecificExeName("EnableOSVRDirectMode");
             var enableDirectModePath = System.IO.Path.Combine(serverPath, enableDirectModeFileName);
-            Process.Start(enableDirectModePath, GetArguments(threeLetterVendorPNPID));
+            OSExeUtil.RunProcessInOwnConsole(enableDirectModePath, serverPath, GetArguments(threeLetterVendorPNPID));
         }
     }
 }
