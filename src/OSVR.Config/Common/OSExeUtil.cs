@@ -23,6 +23,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OSVR.Config.Common
 {
@@ -39,7 +40,7 @@ namespace OSVR.Config.Common
             return normalizedName;
         }
 
-        public static void RunProcessInOwnConsole(string processFilePath, string workingDirectory, params string[] arguments)
+        public static Process RunProcessInOwnConsole(string processFilePath, string workingDirectory, params string[] arguments)
         {
             if (processFilePath == null) { throw new ArgumentNullException("processFileName"); }
             if (workingDirectory == null) { throw new ArgumentNullException("workingDirectory"); }
@@ -52,14 +53,14 @@ namespace OSVR.Config.Common
                 startInfo.Arguments = $"/c start \"{processFilePath}\" /D \"{workingDirectory}\" \"{processFilePath}\"{argsStr}";
                 startInfo.WorkingDirectory = workingDirectory;
 
-                Process.Start(startInfo);
+                return Process.Start(startInfo);
             }
             else
             {
                 var startInfo = new ProcessStartInfo();
                 startInfo.FileName = processFilePath;
                 startInfo.WorkingDirectory = workingDirectory;
-                Process.Start(startInfo);
+                return Process.Start(startInfo);
             }
         }
     }
