@@ -17,7 +17,7 @@ var tsProject = ts.createProject(paths.webroot + "tsconfig.json");
 gulp.task('tsc', function () {
 	var tsResult = tsProject.src({ cwd: paths.webroot })
 		.pipe(sourcemaps.init())
-		.pipe(ts(tsProject));
+		.pipe(tsProject());
 	return tsResult.js
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(paths.webroot))
@@ -30,3 +30,5 @@ gulp.task("clean:generated", function (cb) {
 gulp.task("clean", ["clean:generated"]);
 
 gulp.task("build", ["tsc"]);
+
+gulp.task("default", ["build"]);
