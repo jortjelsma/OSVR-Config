@@ -18,6 +18,12 @@
 /// 
 using System.Runtime.InteropServices;
 using System.IO;
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OSVR.Config.Common
 {
@@ -25,11 +31,37 @@ namespace OSVR.Config.Common
     {
         public static string PlatformSpecificExeName(string normalizedName)
         {
+            if (normalizedName == null) { throw new ArgumentNullException("normalizedName"); }
+
             if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 return Path.ChangeExtension(normalizedName, "exe");
             }
             return normalizedName;
+        }
+
+        public static Process RunProcessInOwnConsole(string processFilePath, string workingDirectory, params string[] arguments)
+        {
+            if (processFilePath == null) { throw new ArgumentNullException("processFileName"); }
+            if (workingDirectory == null) { throw new ArgumentNullException("workingDirectory"); }
+            if (arguments == null) { throw new ArgumentNullException("arguments"); }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                var startInfo = new ProcessStartInfo("cmd.exe");
+                var argsStr = arguments.Length == 0 ? "" : $" {String.Join(" ", arguments)}";
+                startInfo.Arguments = $"/c start \"{processFilePath}\" /D \"{workingDirectory}\" \"{processFilePath}\"{argsStr}";
+                startInfo.WorkingDirectory = workingDirectory;
+
+                return Process.Start(startInfo);
+            }
+            else
+            {
+                var startInfo = new ProcessStartInfo();
+                startInfo.FileName = processFilePath;
+                startInfo.WorkingDirectory = workingDirectory;
+                return Process.Start(startInfo);
+            }
         }
     }
 }

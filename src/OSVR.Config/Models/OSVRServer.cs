@@ -16,6 +16,7 @@
 /// limitations under the License.
 /// </copyright>
 /// 
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -29,10 +30,22 @@ namespace OSVR.Config.Models
         {
             var osvrServerExeFileName = OSExeUtil.PlatformSpecificExeName("osvr_server");
             var osvrServerExe = Path.Combine(serverPath, osvrServerExeFileName);
-            var startInfo = new ProcessStartInfo();
-            startInfo.FileName = osvrServerExe;
-            startInfo.WorkingDirectory = serverPath;
-            Process.Start(startInfo);
+            OSExeUtil.RunProcessInOwnConsole(osvrServerExe, serverPath);
+        }
+
+        public static void Stop()
+        {
+            var servers = Process.GetProcessesByName("osvr_server");
+            foreach(var server in servers)
+            {
+                server.Kill();
+            }
+        }
+
+        public static void Restart(string serverPath)
+        {
+            Stop();
+            Start(serverPath);
         }
 
         public static string ParseServerPath(string environmentValue)
@@ -43,6 +56,17 @@ namespace OSVR.Config.Models
                 return values.Last();
             }
             return environmentValue ?? "";
+        }
+
+        public static string[] RunningServerPaths()
+        {
+            var servers = Process.GetProcessesByName("osvr_server");
+            var ret = new List<string>();
+            foreach(var server in servers)
+            {
+                ret.Add(server.MainModule.FileName);
+            }
+            return ret.ToArray();
         }
     }
 }

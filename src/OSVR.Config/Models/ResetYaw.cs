@@ -16,32 +16,32 @@
 /// limitations under the License.
 /// </copyright>
 /// 
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Diagnostics;
 using OSVR.Config.Common;
+using System.Threading.Tasks;
 
 namespace OSVR.Config.Models
 {
-    public static class TrackerViewer
+    public static class ResetYaw
     {
-        private static IEnumerable<string> GetAllPaths(IEnumerable<string> paths)
+        private static string[] GetArguments(string path)
         {
-            foreach(var pathWithCommas in paths)
+            var ret = new string[] { "--no-wait" };
+            if (!string.IsNullOrWhiteSpace(path))
             {
-                foreach(var truePath in pathWithCommas.Split(','))
-                {
-                    yield return truePath;
-                }
+                ret = new string[] { ret[0], path };
             }
+            return ret;
         }
 
-        public static void Start(IEnumerable<string> paths, string serverPath)
+        public static async Task CallResetYaw(string serverPath, string path = null)
         {
-            var trackerViewerExeName = OSExeUtil.PlatformSpecificExeName("OSVRTrackerView");
-            var trackerViewerPath = System.IO.Path.Combine(serverPath, trackerViewerExeName);
-            OSExeUtil.RunProcessInOwnConsole(trackerViewerPath, serverPath, GetAllPaths(paths).ToArray());
+            var resetYawFileName = OSExeUtil.PlatformSpecificExeName("osvr_reset_yaw");
+            var resetYawPath = System.IO.Path.Combine(serverPath, resetYawFileName);
+            var process = OSExeUtil.RunProcessInOwnConsole(resetYawPath, serverPath, GetArguments(path));
+            var ret = new Task(() => process.WaitForExit());
+            ret.Start();
+            await ret;
         }
     }
 }
