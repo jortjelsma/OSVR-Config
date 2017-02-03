@@ -77,13 +77,9 @@ module app.renderManager {
          * Apply temporary overrides for settings that are not yet shown in the UI.
          */
         applyTemporaryOverrides() {
-            // ATW is not officially released and causes a crash in Unreal when enabled.
-            // disable it until this can be fixed.
-            this.config.timeWarp.asynchronous = false;
-
-            // renderOversampleFactor seems to cause issues in Unreal.
-            // disabling for now.
-            this.config.renderOversampleFactor = 1.0;
+            // as of this writing, setting numBuffers to 1 will almost always result in
+            // tearing, and doesn't improve latency anyway. setting to 2 for now.
+            this.config.numBuffers = 2;
         }
 
         enableDirectMode() {
@@ -117,6 +113,15 @@ module app.renderManager {
                 _ => {
                     this.$scope.renderManagerForm.$setPristine();
                 });
+        }
+
+        enableOrDisableATW() {
+            if (this.config.timeWarp.enabled === true &&
+                this.config.timeWarp.asynchronous === true &&
+                this.config.timeWarp.maxMsBeforeVSync === 0) {
+
+                this.config.timeWarp.maxMsBeforeVSync = 5;
+            }
         }
 
         inputColumnClassObject() {

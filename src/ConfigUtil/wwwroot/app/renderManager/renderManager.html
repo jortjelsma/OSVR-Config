@@ -90,8 +90,7 @@
 							<p class="help-block" data-translate="renderManager.labels.renderOverfillFactorHelp"></p>
 						</div>
 					</div>
-					<!-- re-enable this once the unreal issue is fixed. -->
-					<!--<div class="row">
+					<div class="row">
 						<div class="form-group"
 							 ng-class="vm.inputColumnClassObject()"
 							 ng-show="vm.showAdvanced">
@@ -102,8 +101,8 @@
 								   ng-model="vm.config.renderOversampleFactor" />
 							<p class="help-block" data-translate="renderManager.labels.renderOversampleFactorHelp"></p>
 						</div>
-					</div>-->
-					<div class="row">
+					</div>
+					<!--<div class="row">
 						<div class="form-group" 
 							 ng-class="vm.inputColumnClassObject()"
 							 ng-show="vm.showAdvanced && vm.config.directModeEnabled">
@@ -114,7 +113,7 @@
 								   ng-model="vm.config.numBuffers" />
 							<p class="help-block" data-translate="renderManager.labels.numBuffersHelp"></p>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 
@@ -200,14 +199,15 @@
 
 					</div>
 					<!-- Temporarily disabled until async-timewarp no longer crashes OSVR-Unreal et. al. -->
-					<!--<div class="checkbox" ng-show="vm.config.timeWarp.enabled">
+					<div class="checkbox" ng-show="vm.config.timeWarp.enabled">
 						<label>
 							<input type="checkbox"
-								   ng-model="vm.config.timeWarp.asynchronous" />
+								   ng-model="vm.config.timeWarp.asynchronous"
+								   ng-change="vm.enableOrDisableATW()" />
 							{{'renderManager.labels.timeWarp.asynchronous' | translate}}
 						</label>
 						<p class="help-block" data-translate="renderManager.labels.timeWarp.asynchronousHelp"></p>
-					</div>-->
+					</div>
 
 					<div class="row" ng-show="vm.showAdvanced && vm.config.timeWarp.enabled">
 						<div class="form-group"
