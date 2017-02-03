@@ -83,7 +83,7 @@
     },
     "labels": {
       "infrequentlyUsedSettings": "Show Infrequently Used Settings",
-      "directModeEnabled": "Auto-enable Direct Mode On Application Startup",
+      "directModeEnabled": "Direct Mode Enabled",
       "directDisplayIndex": "Direct Display Index",
       "directDisplayIndexHelp": "Use -1 to automatically find the right display index based on resolution or specify an explicit direct mode display index.",
       "directHighPriorityEnabled": "Direct High Priority Enabled",
