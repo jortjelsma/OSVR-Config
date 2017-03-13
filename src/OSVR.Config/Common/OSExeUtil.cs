@@ -57,9 +57,11 @@ namespace OSVR.Config.Common
             }
             else
             {
-                var startInfo = new ProcessStartInfo();
-                startInfo.FileName = processFilePath;
-                startInfo.WorkingDirectory = workingDirectory;
+                var startInfo = new ProcessStartInfo()
+                {
+                    FileName = processFilePath,
+                    WorkingDirectory = workingDirectory
+                };
                 return Process.Start(startInfo);
             }
         }
