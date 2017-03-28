@@ -64,7 +64,12 @@ module app.common {
         }
 
         getAvailableManualLoadPlugins(): ng.IPromise<IOSVRPlugin[]> {
-            return this.$http.get("/api/availablemanualloadplugins").then(result => { return result.data });
+            return this.$http.get("/api/plugins", {
+                params: {
+                    withManualPlugins: true,
+                    withAutoPlugins: false
+                }
+            }).then(result => { return result.data });
         }
 
         getAvailableDisplays(): ng.IPromise<IOSVRDisplay[]> {
