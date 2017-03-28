@@ -29,20 +29,20 @@ using System.IO;
 namespace OSVR.Config.Controllers
 {
     [Route("api/[controller]")]
-    public class AvailableManualLoadPluginsController : Controller
+    public class PluginsController : Controller
     {
         private readonly IConfiguration config;
-        public AvailableManualLoadPluginsController(IConfiguration config)
+        public PluginsController(IConfiguration config)
         {
             this.config = config;
         }
 
-        // GET: api/availablemanualloadplugins
+        // GET: api/plugins
         [HttpGet]
-        public IEnumerable<ManualLoadPlugin> Get()
+        public IEnumerable<Plugin> Get([FromQuery]bool withManualPlugins = true, [FromQuery]bool withAutoPlugins = true)
         {
             var serverPath = this.config.GetOSVRServerDirectory();
-            return ManualLoadPlugin.GetAvailablePlugins(serverPath);
+            return Plugin.GetAvailablePlugins(serverPath, withManualPlugins, withAutoPlugins);
         }
     }
 }
