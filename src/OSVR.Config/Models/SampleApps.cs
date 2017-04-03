@@ -101,12 +101,20 @@ namespace OSVR.Config.Models
                 description: "Basic '3D cube room' demo written for OpenGL core profile. Uses Qt5 as the window and graphics context toolkit to test RenderManager integration with externally created OpenGL graphics contexts."),
         };
 
+        private static string GetSampleAppFullPath(string serverPath, string fileName)
+        {
+            var platformSpecificFileName = OSExeUtil.PlatformSpecificExeName(fileName);
+            var ret = Path.Combine(serverPath, platformSpecificFileName);
+            return ret;
+        }
 
         public static IEnumerable<SampleApp> GetSampleApps(string serverPath)
         {
             // just return a hard-coded list for now.
             // @todo can we dynamically generate this from a json config file/etc...?
-            return sampleApps;
+            return from app in sampleApps
+                   where File.Exists(GetSampleAppFullPath(serverPath, app.FileName))
+                   select app;
         }
 
         public static bool RunSampleApp(string fileName, string serverPath)
@@ -122,10 +130,7 @@ namespace OSVR.Config.Models
                 return false;
             }
 
-            var platformSpecificFileName = OSExeUtil.PlatformSpecificExeName(
-                sampleApp.FileName);
-
-            var fullFileName = Path.Combine(serverPath, platformSpecificFileName);
+            var fullFileName = GetSampleAppFullPath(serverPath, sampleApp.FileName);
             OSExeUtil.RunProcessInOwnConsole(fullFileName, serverPath);
             return true;
         }
