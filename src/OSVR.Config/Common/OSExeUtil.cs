@@ -65,5 +65,21 @@ namespace OSVR.Config.Common
                 return Process.Start(startInfo);
             }
         }
+
+        public static void SendProcessTerminateSignal(int processId)
+        {
+            if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                var startInfo = new ProcessStartInfo("taskkill.exe");
+                startInfo.Arguments = $"/PID {processId}";
+                Process.Start(startInfo);
+            }
+            else
+            {
+                // @todo send the right terminate signal for each platform other than windows
+                var process = Process.GetProcessById(processId);
+                process.Kill();
+            }
+        }
     }
 }

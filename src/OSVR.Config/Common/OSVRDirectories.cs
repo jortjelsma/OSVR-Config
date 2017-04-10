@@ -52,7 +52,7 @@ namespace OSVR.Config.Common
                 // Windows 7: ???
                 // Windows 8: ???
                 // Windows 10: Tested, works.
-                osvrUserDirectory = Environment.GetEnvironmentVariable("AppData");
+                osvrUserDirectory = Environment.GetEnvironmentVariable("LocalAppData");
                 if (String.IsNullOrWhiteSpace(osvrUserDirectory))
                 {
                     osvrUserDirectory = "C:\\";
@@ -96,6 +96,20 @@ namespace OSVR.Config.Common
             return osvrUserDirectory;
         }
 
+        static string GetUserSubdirectory(string serverPath, string subdirectoryName, bool create = true)
+        {
+            if (serverPath == null) { throw new ArgumentNullException("serverPath"); }
+            if (subdirectoryName == null) { throw new ArgumentNullException("subdirectoryName"); }
+
+            string osvrUserDirectory = GetUserDirectory(serverPath, create);
+            string subdirectory = Path.Combine(osvrUserDirectory, subdirectoryName);
+            if (create && !Directory.Exists(subdirectory))
+            {
+                Directory.CreateDirectory(subdirectory);
+            }
+            return subdirectory;
+        }
+
         /// <summary>
         /// Get the OSVR user profile root directory.
         /// </summary>
@@ -105,15 +119,19 @@ namespace OSVR.Config.Common
         /// <returns>The current user profile directory.</returns>
         public static string GetUserProfileDirectory(string serverPath, bool create = true)
         {
-            if (serverPath == null) { throw new ArgumentNullException("serverPath"); }
+            return GetUserSubdirectory(serverPath, "profiles", create);
+        }
 
-            string osvrUserDirectory = GetUserDirectory(serverPath, create);
-            string profileDirectory = Path.Combine(osvrUserDirectory, "profiles");
-            if(create && !Directory.Exists(profileDirectory))
-            {
-                Directory.CreateDirectory(profileDirectory);
-            }
-            return profileDirectory;
+        /// <summary>
+        /// Get the OSVR user config root directory.
+        /// </summary>
+        /// <param name="serverPath">The OSVR server root path.</param>
+        /// <param name="create">Pass true to create the directories, if
+        /// not already there. true by default.</param>
+        /// <returns>The current user config directory.</returns>
+        public static string GetUserConfigDirectory(string serverPath, bool create = true)
+        {
+            return GetUserSubdirectory(serverPath, "config", create);
         }
     }
 }

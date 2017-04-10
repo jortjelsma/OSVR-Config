@@ -38,7 +38,8 @@ namespace OSVR.Config.Models
             var servers = Process.GetProcessesByName("osvr_server");
             foreach(var server in servers)
             {
-                server.Kill();
+                //server.Kill();
+                OSExeUtil.SendProcessTerminateSignal(server.Id);
             }
         }
 

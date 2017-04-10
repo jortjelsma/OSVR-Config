@@ -19,6 +19,7 @@
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using OSVR.Config.Common;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -65,13 +66,30 @@ namespace OSVR.Config.Models
 
         public static OSVRConfig GetCurrent(IConfiguration config, string serverRoot)
         {
-            var configPath = Path.Combine(serverRoot, "osvr_server_config.json");
+            string configDirectory = OSVRDirectories.GetUserConfigDirectory(serverRoot, true);
+            string configFileName = "osvr_server_config.json";
+            string userFolderConfigPath = Path.Combine(configDirectory, configFileName);
+            string globalConfigPath = Path.Combine(serverRoot, configFileName);
+            string configPath = null;
+            if (File.Exists(userFolderConfigPath))
+            {
+                configPath = userFolderConfigPath;
+            }
+            else if(File.Exists(globalConfigPath))
+            {
+                configPath = globalConfigPath;
+            }
+            else
+            {
+                return null;
+            }
             return OSVRConfig.Read(configPath, serverRoot);
         }
 
         public static void SetCurrent(OSVRConfig value, string serverRoot)
         {
-            var configPath = Path.Combine(serverRoot, "osvr_server_config.json");
+            string configDirectory = OSVRDirectories.GetUserConfigDirectory(serverRoot, true);
+            var configPath = Path.Combine(configDirectory, "osvr_server_config.json");
 
             // ignoring includes.
             var mainConfigBody = value.Body;
