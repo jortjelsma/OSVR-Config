@@ -1,0 +1,87 @@
+{
+ 	"display": "displays/Oculus_Rift_DK1.json",
+	"renderManagerConfig": "sample-configs/renderManager.direct.landscape.json",
+	"drivers": [{
+			"plugin": "je_nourish_fusion",
+			"driver": "FusionDevice",
+			"params": {
+				"name": "DK1_Kinectv2",
+				"position": "/je_nourish_kinectv2/KinectV2/semantic/body1/head",
+				"orientation": "/je_nourish_openhmd/Oculus Rift (Devkit)/semantic/hmd",
+				"alignInitialOrientation": true,
+				"offsetFromRotationCenter": {
+					"x": 0,
+					"y": 0.01,
+					"z": -0.05
+				}
+			}
+		},
+		{
+			"plugin": "je_nourish_fusion",
+			"driver": "FusionDevice",
+			"params": {
+				"name": "Wii_Kinect_Right",
+				"position": "/je_nourish_kinectv2/KinectV2/semantic/body1/arms/right/hand",
+				"orientation": {
+					"roll": "/je_nourish_wiimote/WiimoteDevice/semantic/wiimote1/nunchuk",
+					"pitch": "/je_nourish_wiimote/WiimoteDevice/semantic/wiimote1/nunchuk",
+					"yaw": "/je_nourish_kinectv2/KinectV2/semantic/body1/arms/right/hand"
+				}
+			}
+		},
+		{
+			"plugin": "je_nourish_fusion",
+			"driver": "FusionDevice",
+			"params": {
+				"name": "Wii_Kinect_Left",
+				"position": "/je_nourish_kinectv2/KinectV2/semantic/body1/arms/left/hand",
+				"orientation": {
+					"roll": "/je_nourish_wiimote/WiimoteDevice/semantic/wiimote2/nunchuk",
+					"pitch": "/je_nourish_wiimote/WiimoteDevice/semantic/wiimote2/nunchuk",
+					"yaw": "/je_nourish_kinectv2/KinectV2/semantic/body1/arms/left/hand"
+				}
+			}
+		},
+		{
+			"plugin": "org_osvr_filter_oneeuro",
+			"driver": "OneEuroFilter",
+			"params": {
+				"name": "FilteredLeftHand",
+				"input": "/je_nourish_fusion/Wii_Kinect_Left/tracker/0",
+				"position": {
+					"minCutoff": 1.15,
+					"beta": 0.5,
+					"derivativeCutoff": 1.2
+				},
+				"orientation": {
+					"minCutoff": 1.5,
+					"beta": 0.5,
+					"derivativeCutoff": 1.2
+				}
+			}
+		},
+		{
+			"plugin": "org_osvr_filter_oneeuro",
+			"driver": "OneEuroFilter",
+			"params": {
+				"name": "FilteredRightHand",
+				"input": "/je_nourish_fusion/Wii_Kinect_Right/tracker/0",
+				"position": {
+					"minCutoff": 1.15,
+					"beta": 0.5,
+					"derivativeCutoff": 1.2
+				},
+				"orientation": {
+					"minCutoff": 1.5,
+					"beta": 0.5,
+					"derivativeCutoff": 1.2
+				}
+			}
+		}
+	],
+	"aliases": {
+		"/me/head": "/je_nourish_fusion/DK1_Kinectv2/tracker/0",
+		"/me/hands/right": "/org_osvr_filter_oneeuro/FilteredRightHand/tracker/0",
+		"/me/hands/left": "/org_osvr_filter_oneeuro/FilteredLeftHand/tracker/0"
+	}
+}
